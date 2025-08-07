@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">MySite</a>
+            <a class="navbar-brand" href="#">MyCI</a>
             <a class="nav-link text-white" href="#">Home</a>
         </div>
     </nav>
