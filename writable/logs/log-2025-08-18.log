@@ -1,0 +1,16 @@
+ERROR - 2025-08-18 06:16:00 --> mysqli_sql_exception: Table 'users' already exists in E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(327): mysqli->query('CREATE TABLE `u...', 0)
+#1 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `u...')
+#2 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `u...')
+#3 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `u...')
+#4 E:\xampp\htdocs\ITE311-ALBARINA\app\Database\Migrations\2025-08-17-145153_CreateUsersTable.php(46): CodeIgniter\Database\Forge->createTable('users')
+#5 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(876): App\Database\Migrations\CreateUsersTable->up()
+#6 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(388): CodeIgniter\CLI\Console->run()
+#11 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(133): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 E:\xampp\htdocs\ITE311-ALBARINA\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}
