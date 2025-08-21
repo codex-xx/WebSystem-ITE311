@@ -11,45 +11,29 @@ class CreateLessonsTable extends Migration
         $this->forge->addField([
             'id' => [
                 'type'           => 'INT',
-                'constraint'     => 11,
+                'constraint'     => 10,
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'course_id' => [
                 'type'       => 'INT',
-                'constraint' => 11,
+                'constraint' => 10,
                 'unsigned'   => true,
             ],
             'title' => [
                 'type'       => 'VARCHAR',
-                'constraint' => 150,
+                'constraint' => 255,
             ],
-            'description' => [
+            'content' => [
                 'type' => 'TEXT',
                 'null' => true,
             ],
-            'lesson_order' => [
-                'type'       => 'INT',
-                'constraint' => 3,
-                'default'    => 1,
-            ],
-            'created_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
-            'updated_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
+            'created_at DATETIME DEFAULT CURRENT_TIMESTAMP',
+            'updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
         ]);
 
-        // Primary key
         $this->forge->addKey('id', true);
-
-        // Foreign key to courses table
         $this->forge->addForeignKey('course_id', 'courses', 'id', 'CASCADE', 'CASCADE');
-
-        // Create table
         $this->forge->createTable('lessons');
     }
 

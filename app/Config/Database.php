@@ -29,7 +29,7 @@ class Database extends Config
     'hostname' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'database' => 'lms_Albarina',
+    'database' => 'lms_albarina',
     'DBDriver' => 'MySQLi',
     'DBPrefix' => '',
     'pConnect' => false,

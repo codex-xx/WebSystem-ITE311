@@ -11,53 +11,29 @@ class CreateQuizzesTable extends Migration
         $this->forge->addField([
             'id' => [
                 'type'           => 'INT',
-                'constraint'     => 11,
+                'constraint'     => 10,
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'lesson_id' => [
                 'type'       => 'INT',
-                'constraint' => 11,
+                'constraint' => 10,
                 'unsigned'   => true,
             ],
             'title' => [
                 'type'       => 'VARCHAR',
-                'constraint' => 150,
+                'constraint' => 255,
             ],
-            'description' => [
+            'questions' => [
                 'type' => 'TEXT',
                 'null' => true,
             ],
-            'total_points' => [
-                'type'       => 'INT',
-                'constraint' => 5,
-                'default'    => 100,
-            ],
-            'available_from' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
-            'available_to' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
-            'created_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
-            'updated_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
+            'created_at DATETIME DEFAULT CURRENT_TIMESTAMP',
+            'updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
         ]);
 
-        // Primary key
         $this->forge->addKey('id', true);
-
-        // Foreign key to lessons table
         $this->forge->addForeignKey('lesson_id', 'lessons', 'id', 'CASCADE', 'CASCADE');
-
-        // Create table
         $this->forge->createTable('quizzes');
     }
 
