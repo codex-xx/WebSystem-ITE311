@@ -1,0 +1,191 @@
+CRITICAL - 2025-08-27 10:12:17 --> Error: Class "App\Models\UserModel" not found
+[Method: GET, Route: login]
+in APPPATH\Controllers\auth.php on line 44.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-27 10:12:19 --> Error: Class "App\Models\UserModel" not found
+[Method: GET, Route: login]
+in APPPATH\Controllers\auth.php on line 44.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-27 10:17:13 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "register.php"
+[Method: GET, Route: register]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('register.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('register', [], true)
+ 3 APPPATH\Controllers\auth.php(39): view('register')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->register()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-27 10:23:08 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "register.php"
+[Method: GET, Route: register]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('register.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('register', [], true)
+ 3 APPPATH\Controllers\auth.php(39): view('register')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->register()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-08-27 10:29:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:29:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:29:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:29:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:29:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:38:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:38:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:38:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:38:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:38:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:38:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:38:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:40:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:40:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:40:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:40:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:40:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:40:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:42:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:42:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:42:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:42:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:42:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:42:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:42:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:42:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:42:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:45:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:45:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:46:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:46:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:47:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:47:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-08-27 10:48:10 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'ite311_albarina' in E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:202
+Stack trace:
+#0 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(202): mysqli->real_connect('localhost', 'root', '', 'ite311_albarina', 3306, '', 0)
+#1 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1525): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#4 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1545): CodeIgniter\Database\BaseConnection->listTables()
+#5 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(768): CodeIgniter\Database\BaseConnection->tableExists('sequential')
+#6 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(162): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(388): CodeIgniter\CLI\Console->run()
+#11 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(133): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 E:\xampp\htdocs\ITE311-ALBARINA\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'ite311_albarina' in E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1525): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#3 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1545): CodeIgniter\Database\BaseConnection->listTables()
+#4 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(768): CodeIgniter\Database\BaseConnection->tableExists('sequential')
+#5 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(162): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#7 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#8 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', Array)
+#9 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(388): CodeIgniter\CLI\Console->run()
+#10 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(133): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#11 E:\xampp\htdocs\ITE311-ALBARINA\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#12 {main}
+ERROR - 2025-08-27 10:49:00 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'ite311_albarina' in E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:202
+Stack trace:
+#0 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(202): mysqli->real_connect('localhost', 'root', '', 'ite311_albarina', 3306, '', 0)
+#1 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1525): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#4 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1545): CodeIgniter\Database\BaseConnection->listTables()
+#5 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(768): CodeIgniter\Database\BaseConnection->tableExists('sequential')
+#6 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(231): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\MigrateRollback.php(101): CodeIgniter\Database\MigrationRunner->regress(0)
+#8 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRollback->run(Array)
+#9 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate:rollbac...', Array)
+#10 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\MigrateRefresh.php(86): CodeIgniter\CLI\BaseCommand->call('migrate:rollbac...', Array)
+#11 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run(Array)
+#12 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', Array)
+#13 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(388): CodeIgniter\CLI\Console->run()
+#14 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(133): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#15 E:\xampp\htdocs\ITE311-ALBARINA\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#16 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'ite311_albarina' in E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1525): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#3 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1545): CodeIgniter\Database\BaseConnection->listTables()
+#4 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(768): CodeIgniter\Database\BaseConnection->tableExists('sequential')
+#5 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(231): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\MigrateRollback.php(101): CodeIgniter\Database\MigrationRunner->regress(0)
+#7 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRollback->run(Array)
+#8 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate:rollbac...', Array)
+#9 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\MigrateRefresh.php(86): CodeIgniter\CLI\BaseCommand->call('migrate:rollbac...', Array)
+#10 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run(Array)
+#11 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', Array)
+#12 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(388): CodeIgniter\CLI\Console->run()
+#13 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(133): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#14 E:\xampp\htdocs\ITE311-ALBARINA\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#15 {main}
+ERROR - 2025-08-27 10:49:00 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'ite311_albarina' in E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:202
+Stack trace:
+#0 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(202): mysqli->real_connect('localhost', 'root', '', 'ite311_albarina', 3306, '', 0)
+#1 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1525): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#4 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1545): CodeIgniter\Database\BaseConnection->listTables()
+#5 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(768): CodeIgniter\Database\BaseConnection->tableExists('sequential')
+#6 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(162): CodeIgniter\Database\MigrationRunner->ensureTable()
+#7 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\MigrateRefresh.php(87): CodeIgniter\CLI\BaseCommand->call('migrate', Array)
+#11 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run(Array)
+#12 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', Array)
+#13 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(388): CodeIgniter\CLI\Console->run()
+#14 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(133): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#15 E:\xampp\htdocs\ITE311-ALBARINA\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#16 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'ite311_albarina' in E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1525): CodeIgniter\Database\BaseConnection->query('SHOW TABLES FRO...')
+#3 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(1545): CodeIgniter\Database\BaseConnection->listTables()
+#4 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(768): CodeIgniter\Database\BaseConnection->tableExists('sequential')
+#5 E:\xampp\htdocs\ITE311-ALBARINA\system\Database\MigrationRunner.php(162): CodeIgniter\Database\MigrationRunner->ensureTable()
+#6 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#7 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#8 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', Array)
+#9 E:\xampp\htdocs\ITE311-ALBARINA\system\Commands\Database\MigrateRefresh.php(87): CodeIgniter\CLI\BaseCommand->call('migrate', Array)
+#10 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\MigrateRefresh->run(Array)
+#11 E:\xampp\htdocs\ITE311-ALBARINA\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate:refresh', Array)
+#12 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(388): CodeIgniter\CLI\Console->run()
+#13 E:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(133): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#14 E:\xampp\htdocs\ITE311-ALBARINA\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#15 {main}
+DEBUG - 2025-08-27 10:51:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:52:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:52:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:52:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:52:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:55:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:58:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-08-27 10:58:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
