@@ -30,6 +30,18 @@
                         <label for="password_confirm" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
                     </div>
+
+                    <!-- ✅ Role Selector -->
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Register as</label>
+                        <select class="form-control" id="role" name="role" required>
+                            <option value="">-- Select Role --</option>
+                            <option value="admin" <?= old('role') === 'admin' ? 'selected' : '' ?>>Admin</option>
+                            <option value="teacher" <?= old('role') === 'teacher' ? 'selected' : '' ?>>Teacher</option>
+                            <option value="student" <?= old('role') === 'student' ? 'selected' : '' ?>>Student</option>
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn btn-primary w-100">Create Account</button>
                 </form>
 
