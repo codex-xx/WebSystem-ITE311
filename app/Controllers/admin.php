@@ -1,6 +1,6 @@
-<?php namespace App\Controllers;
+<?php
 
-use App\Controllers\BaseController;
+namespace App\Controllers;
 
 class Admin extends BaseController
 {
@@ -8,16 +8,15 @@ class Admin extends BaseController
     {
         $session = session();
 
-        // ✅ Authorization check
+        // Authorization check
         if ($session->get('role') !== 'admin') {
-            return redirect()->to('/login')->with('error', 'Unauthorized access');
+            return redirect()->to('/auth/login')->with('error', 'Access denied');
         }
 
-        // Example data (replace with real queries later)
+        // Example data for admin
         $data = [
-            'title'       => 'Admin Dashboard',
-            'totalUsers'  => 120,
-            'totalCourses'=> 15
+            'title' => 'Admin Dashboard',
+            'users' => ['Teacher 1', 'Teacher 2', 'Student A', 'Student B']
         ];
 
         return view('admin/dashboard', $data);
