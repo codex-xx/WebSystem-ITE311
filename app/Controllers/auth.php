@@ -26,7 +26,8 @@ class Auth extends Controller
                     $data = [
                         'name'     => trim($this->request->getPost('name')),
                         'email'    => $this->request->getPost('email'),
-                        'password' => $this->request->getPost('password'), // raw password
+                        // ✅ Hash password before saving
+                        'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
                         'role'     => $this->request->getPost('role')
                     ];
                     
@@ -81,13 +82,13 @@ class Auth extends Controller
                         $session->setFlashdata('success', 'Welcome, ' . $sessionData['user_name'] . '!');
                         
                         // ✅ Redirect based on role
-                        if ($user['role'] === 'admin') {
-                            return redirect()->to('/admin/dashboard');
-                        } elseif ($user['role'] === 'teacher') {
-                            return redirect()->to('/teacher/dashboard');
-                        } else {
-                            return redirect()->to('/student/dashboard');
-                        }
+                      if ($user['role'] === 'admin') {
+                        return redirect()->to('/dashboard');
+                    } elseif ($user['role'] === 'teacher') {
+                        return redirect()->to('/dashboard');
+                    } elseif ($user['role'] === 'student') {
+                        return redirect()->to('/dashboard');
+                    }
                     } else {
                         $session->setFlashdata('login_error', 'Invalid email or password.');
                     }
@@ -115,17 +116,36 @@ class Auth extends Controller
     {
         $session = session();
         
+        // ✅ Step 1: Authorization check
         if (!$session->get('isLoggedIn')) {
             $session->setFlashdata('login_error', 'Please login first.');
             return redirect()->to('login');
         }
-        
+
+        $model = new UserModel();
+        $role  = $session->get('role');
+        $userId = $session->get('user_id');
+
+        $roleData = [];
+
+        // ✅ Step 2: Fetch role-specific data
+        if ($role === 'admin') {
+            $roleData['total_users'] = $model->countAll();
+            $roleData['recent_users'] = $model->orderBy('id', 'DESC')->findAll(5);
+        } elseif ($role === 'teacher') {
+            $roleData['students'] = $model->where('role', 'student')->findAll();
+        } elseif ($role === 'student') {
+            $roleData['profile'] = $model->find($userId);
+        }
+
+        // ✅ Step 3: Pass role + data to view
         $data = [
             'user_name'  => $session->get('user_name'),
             'user_email' => $session->get('user_email'),
-            'role'       => $session->get('role')
+            'role'       => $role,
+            'roleData'   => $roleData
         ];
         
-        return view('dashboard', $data);
+        return view('auth/dashboard', $data);
     }
 }
