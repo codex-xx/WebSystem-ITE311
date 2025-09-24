@@ -23,19 +23,11 @@ class Auth extends Controller
             
             if ($this->validate($rules)) {
                 try {
-                    $name     = trim($this->request->getPost('name'));
-                    $email    = $this->request->getPost('email');
-                    $plainPwd = $this->request->getPost('password');
-                    $role     = $this->request->getPost('role'); // user chooses role
-                    
-                    // ✅ Hash the password
-                    $hashedPwd = password_hash($plainPwd, PASSWORD_DEFAULT);
-
                     $data = [
-                        'name'     => $name,
-                        'email'    => $email,
-                        'password' => $hashedPwd,
-                        'role'     => $role
+                        'name'     => trim($this->request->getPost('name')),
+                        'email'    => $this->request->getPost('email'),
+                        'password' => $this->request->getPost('password'), // raw password
+                        'role'     => $this->request->getPost('role')
                     ];
                     
                     if ($model->insert($data)) {
@@ -77,18 +69,16 @@ class Auth extends Controller
                     $user  = $model->where('email', $email)->first();
                     
                     if ($user && password_verify($password, $user['password'])) {
-                        $userName = $user['name'] ?? $user['email'];
-                        
                         $sessionData = [
                             'user_id'    => $user['id'],
-                            'user_name'  => $userName,
+                            'user_name'  => $user['name'] ?? $user['email'],
                             'user_email' => $user['email'],
                             'role'       => $user['role'],
                             'isLoggedIn' => true
                         ];
                         
                         $session->set($sessionData);
-                        $session->setFlashdata('success', 'Welcome, ' . $userName . '!');
+                        $session->setFlashdata('success', 'Welcome, ' . $sessionData['user_name'] . '!');
                         
                         // ✅ Redirect based on role
                         if ($user['role'] === 'admin') {
