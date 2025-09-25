@@ -1,0 +1,2 @@
+__ci_last_regenerate|i:1758828495;_ci_previous_url|s:38:"http://localhost/ITE311-ALBARINA/login";login_error|s:107:"Login failed: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'lms_albarina'";__ci_vars|a:1:{s:11:"login_error";s:3:"new";}
