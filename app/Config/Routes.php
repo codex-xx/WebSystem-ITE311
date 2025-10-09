@@ -18,3 +18,4 @@ $routes->get('logout', 'Auth::logout');
 $routes->get('dashboard', 'Auth::dashboard');
 
 $routes->get('/admin/dashboard', 'Admin::dashboard');
+$routes->post('/course/enroll', 'Course::enroll');

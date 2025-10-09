@@ -35,6 +35,14 @@ class UserSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
+            [
+                'name'       => 'Carl',
+                'email'      => 'carl@example.com',
+                'password'   => $defaultPassword,
+                'role'       => 'student',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $this->db->table('users')->insertBatch($users);

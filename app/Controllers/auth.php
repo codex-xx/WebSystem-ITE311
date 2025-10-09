@@ -136,6 +136,18 @@ class Auth extends Controller
             $roleData['students'] = $model->where('role', 'student')->findAll();
         } elseif ($role === 'student') {
             $roleData['profile'] = $model->find($userId);
+
+            // Fetch enrolled and available courses
+            $enrollmentModel = new \App\Models\EnrollmentModel();
+            $db = \Config\Database::connect();
+
+            $enrolledCourses = $enrollmentModel->getUserEnrollments($userId);
+            $allCourses = $db->table('courses')->get()->getResultArray();
+
+            $enrolledIds = array_column($enrolledCourses, 'course_id');
+            $availableCourses = array_filter($allCourses, function($course) use ($enrolledIds) {
+                return !in_array($course['id'], $enrolledIds);
+            });
         }
 
         // ✅ Step 3: Pass role + data to view
@@ -145,6 +157,12 @@ class Auth extends Controller
             'role'       => $role,
             'roleData'   => $roleData
         ];
+
+        // Add course data for students
+        if ($role === 'student') {
+            $data['enrolledCourses'] = $enrolledCourses ?? [];
+            $data['availableCourses'] = $availableCourses ?? [];
+        }
         
         return view('auth/dashboard', $data);
     }
