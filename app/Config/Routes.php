@@ -15,7 +15,11 @@ $routes->post('register', 'Auth::register');
 $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::login');
 $routes->get('logout', 'Auth::logout');
+$routes->post('/logout', 'Auth::logout');
 $routes->get('dashboard', 'Auth::dashboard');
 
 $routes->get('/admin/dashboard', 'Admin::dashboard');
 $routes->post('/course/enroll', 'Course::enroll');
+$routes->get('announcements', 'Announcement::index');
+$routes->get('/teacher/dashboard', 'Teacher::dashboard');
+$routes->get('/admin/dashboard', 'Admin::dashboard');

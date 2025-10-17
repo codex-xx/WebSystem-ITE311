@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\UserModel;
@@ -18,7 +19,7 @@ class Auth extends Controller
                 'email'            => 'required|valid_email|is_unique[users.email]',
                 'password'         => 'required|min_length[6]',
                 'password_confirm' => 'matches[password]',
-                'role'             => 'required|in_list[admin,teacher,student]'
+                'role'             => 'required|in_list[admin,teacher,student]'  // Note: Not ideal for production
             ];
             
             if ($this->validate($rules)) {
@@ -26,9 +27,8 @@ class Auth extends Controller
                     $data = [
                         'name'     => trim($this->request->getPost('name')),
                         'email'    => $this->request->getPost('email'),
-                        // ✅ Hash password before saving
                         'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                        'role'     => $this->request->getPost('role')
+                        'role'     => $this->request->getPost('role')  // User-selected role
                     ];
                     
                     if ($model->insert($data)) {
@@ -74,7 +74,7 @@ class Auth extends Controller
                             'user_id'    => $user['id'],
                             'user_name'  => $user['name'] ?? $user['email'],
                             'user_email' => $user['email'],
-                            'role'       => $user['role'],
+                            'user_role'  => $user['role'],  // ✅ Changed from 'role' to 'user_role'
                             'isLoggedIn' => true
                         ];
                         
@@ -82,13 +82,16 @@ class Auth extends Controller
                         $session->setFlashdata('success', 'Welcome, ' . $sessionData['user_name'] . '!');
                         
                         // ✅ Redirect based on role
-                      if ($user['role'] === 'admin') {
-                        return redirect()->to('/dashboard');
-                    } elseif ($user['role'] === 'teacher') {
-                        return redirect()->to('/dashboard');
-                    } elseif ($user['role'] === 'student') {
-                        return redirect()->to('/dashboard');
-                    }
+                        if ($user['role'] === 'admin') {
+                            return redirect()->to('/admin/dashboard');
+                        } elseif ($user['role'] === 'teacher') {
+                            return redirect()->to('/teacher/dashboard');
+                        } elseif ($user['role'] === 'student') {
+                            return redirect()->to('/announcements');
+                        } else {
+                            $session->setFlashdata('login_error', 'Unknown role. Please contact support.');
+                            return redirect()->to('login');
+                        }
                     } else {
                         $session->setFlashdata('login_error', 'Invalid email or password.');
                     }
@@ -123,18 +126,18 @@ class Auth extends Controller
         }
 
         $model = new UserModel();
-        $role  = $session->get('role');
+        $userRole = $session->get('user_role');  // ✅ Changed from 'role' to 'user_role'
         $userId = $session->get('user_id');
 
         $roleData = [];
 
         // ✅ Step 2: Fetch role-specific data
-        if ($role === 'admin') {
+        if ($userRole === 'admin') {
             $roleData['total_users'] = $model->countAll();
             $roleData['recent_users'] = $model->orderBy('id', 'DESC')->findAll(5);
-        } elseif ($role === 'teacher') {
-            $roleData['students'] = $model->where('role', 'student')->findAll();
-        } elseif ($role === 'student') {
+        } elseif ($userRole === 'teacher') {
+            $roleData['students'] = $model->where('role', 'student')->findAll();  
+        } elseif ($userRole === 'student') {
             $roleData['profile'] = $model->find($userId);
 
             // Fetch enrolled and available courses
@@ -154,12 +157,12 @@ class Auth extends Controller
         $data = [
             'user_name'  => $session->get('user_name'),
             'user_email' => $session->get('user_email'),
-            'role'       => $role,
+            'user_role'  => $userRole,  // ✅ Using 'user_role'
             'roleData'   => $roleData
         ];
 
         // Add course data for students
-        if ($role === 'student') {
+        if ($userRole === 'student') {
             $data['enrolledCourses'] = $enrolledCourses ?? [];
             $data['availableCourses'] = $availableCourses ?? [];
         }

@@ -42,6 +42,22 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
       color: white;
     }
+
+    .logout-btn {
+      color: #f8f9fa;
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-left: 10px;
+      background: none;
+      border: none;
+      transition: color 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      color: #dc3545;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -65,20 +81,15 @@
       <!-- Nav items -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('/') ?>">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('/about') ?>">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('/contact') ?>">Contact</a></li>
           <?php if ($session->get('isLoggedIn')): ?>
-              <?php if ($session->get('role') === 'admin'): ?>
-                  <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/users') ?>">Manage Users</a></li>
-                  <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/reports') ?>">Reports</a></li>
-              <?php elseif ($session->get('role') === 'teacher'): ?>
-                  <li class="nav-item"><a class="nav-link" href="<?= base_url('teacher/classes') ?>">My Classes</a></li>
-                  <li class="nav-item"><a class="nav-link" href="<?= base_url('teacher/students') ?>">Students</a></li>
-              <?php elseif ($session->get('role') === 'student'): ?>
-                  <li class="nav-item"><a class="nav-link" href="<?= base_url('student/courses') ?>">My Courses</a></li>
-                  <li class="nav-item"><a class="nav-link" href="<?= base_url('student/grades') ?>">My Grades</a></li>
-              <?php endif; ?>
-          <?php else: ?>
-              <li class="nav-item"><a class="nav-link" href="<?= base_url('/login') ?>">Login</a></li>
-              <li class="nav-item"><a class="nav-link" href="<?= base_url('/register') ?>">Register</a></li>
+            <li class="nav-item">
+              <form action="<?= base_url('/logout') ?>" method="post" class="d-inline">
+                <button type="submit" class="logout-btn nav-link">Logout</button>
+              </form>
+            </li>
           <?php endif; ?>
         </ul>
       </div>
