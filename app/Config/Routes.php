@@ -19,3 +19,9 @@ $routes->get('dashboard', 'Auth::dashboard');
 
 $routes->get('/admin/dashboard', 'Admin::dashboard');
 $routes->post('/course/enroll', 'Course::enroll');
+
+// Materials routes
+$routes->get('/admin/course/(:num)/upload', 'Materials::upload/$1');
+$routes->post('/admin/course/(:num)/upload', 'Materials::upload/$1');
+$routes->get('/materials/delete/(:num)', 'Materials::delete/$1');
+$routes->get('/materials/download/(:num)', 'Materials::download/$1');

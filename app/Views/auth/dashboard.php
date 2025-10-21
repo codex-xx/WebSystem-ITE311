@@ -75,6 +75,36 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Courses Management for Admins -->
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Course Management</h5>
+                        <p class="text-muted">Upload materials for courses</p>
+                        <?php
+                        $db = \Config\Database::connect();
+                        $courses = $db->table('courses')->get()->getResultArray();
+                        if (!empty($courses)): ?>
+                            <div class="row">
+                                <?php foreach ($courses as $course): ?>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h6 class="card-title"><?= esc($course['title']) ?></h6>
+                                                <p class="card-text"><?= esc($course['description'] ?? 'No description available.') ?></p>
+                                                <a href="<?= base_url('/admin/course/' . $course['id'] . '/upload') ?>" class="btn btn-primary btn-sm">
+                                                    <i class="bi bi-upload"></i> Upload Material
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <p class="text-muted">No courses available.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
             <?php endif; ?>
 
             <!-- Teacher Dashboard -->
@@ -102,6 +132,36 @@
                                 <?php endif; ?>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+
+                <!-- Courses Management for Teachers -->
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Course Management</h5>
+                        <p class="text-muted">Upload materials for courses</p>
+                        <?php
+                        $db = \Config\Database::connect();
+                        $courses = $db->table('courses')->get()->getResultArray();
+                        if (!empty($courses)): ?>
+                            <div class="row">
+                                <?php foreach ($courses as $course): ?>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h6 class="card-title"><?= esc($course['title']) ?></h6>
+                                                <p class="card-text"><?= esc($course['description'] ?? 'No description available.') ?></p>
+                                                <a href="<?= base_url('/admin/course/' . $course['id'] . '/upload') ?>" class="btn btn-primary btn-sm">
+                                                    <i class="bi bi-upload"></i> Upload Material
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <p class="text-muted">No courses available.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endif; ?>
@@ -132,6 +192,25 @@
                                             <h6 class="card-title"><?= esc($course['course_name'] ?? $course['title'] ?? 'Unknown Course') ?></h6>
                                             <p class="card-text"><?= esc($course['description'] ?? 'No description available.') ?></p>
                                             <p class="text-muted small">Enrolled on: <?= date('M j, Y', strtotime($course['enrolled_at'])) ?></p>
+                                            <!-- Materials Section -->
+                                            <?php
+                                            $materialModel = new \App\Models\MaterialModel();
+                                            $materials = $materialModel->getMaterialsByCourse($course['course_id']);
+                                            if (!empty($materials)): ?>
+                                                <h6 class="mt-3">Materials:</h6>
+                                                <ul class="list-group list-group-flush">
+                                                    <?php foreach ($materials as $material): ?>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                                            <span><?= esc($material['file_name']) ?></span>
+                                                            <a href="<?= base_url('/materials/download/' . $material['id']) ?>" class="btn btn-sm btn-outline-primary">
+                                                                <i class="bi bi-download"></i> Download
+                                                            </a>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            <?php else: ?>
+                                                <p class="text-muted small mt-2">No materials available yet.</p>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
