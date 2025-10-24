@@ -150,12 +150,17 @@ class Auth extends Controller
             });
         }
 
+        // Fetch unread notification count for all logged-in users
+        $notificationModel = new \App\Models\NotificationModel();
+        $unreadCount = $notificationModel->getUnreadCount($userId);
+
         // ✅ Step 3: Pass role + data to view
         $data = [
             'user_name'  => $session->get('user_name'),
             'user_email' => $session->get('user_email'),
             'role'       => $role,
-            'roleData'   => $roleData
+            'roleData'   => $roleData,
+            'unreadCount' => $unreadCount
         ];
 
         // Add course data for students

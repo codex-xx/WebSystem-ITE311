@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\NotificationModel;
 
 class EnrollmentModel extends Model
 {
@@ -29,7 +30,24 @@ class EnrollmentModel extends Model
             $data['enrolled_at'] = date('Y-m-d H:i:s');
         }
 
-        return $this->insert($data);
+        $enrollment_id = $this->insert($data);
+
+        if ($enrollment_id) {
+            // Fetch course title
+            $course = $this->db->table('courses')->select('title')->where('id', $data['course_id'])->get()->getRow();
+            if ($course) {
+                // Create notification
+                $notificationModel = new NotificationModel();
+                $notificationData = [
+                    'user_id' => $data['user_id'],
+                    'message' => "You have been enrolled in {$course->title}",
+                    'created_at' => date('Y-m-d H:i:s')
+                ];
+                $notificationModel->insert($notificationData);
+            }
+        }
+
+        return $enrollment_id;
     }
 
     /**

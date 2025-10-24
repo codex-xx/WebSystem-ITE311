@@ -45,6 +45,7 @@
   </style>
 </head>
 <body>
+  <?php $session = session(); ?>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid"> <!-- Full width -->
@@ -60,7 +61,11 @@
           <li class="nav-item"><a class="nav-link" href="<?= base_url('/') ?>">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="<?= base_url('/about') ?>">About</a></li>
           <li class="nav-item"><a class="nav-link" href="<?= base_url('/contact') ?>">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= base_url('/login') ?>">Login</a></li>
+          <?php if ($session->get('isLoggedIn')): ?>
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('/dashboard') ?>">Dashboard</a></li>
+          <?php else: ?>
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('/login') ?>">Login</a></li>
+          <?php endif; ?>
         </ul>
       </div>
     </div>
