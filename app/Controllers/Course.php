@@ -13,6 +13,15 @@ class Course extends Controller
         helper('url');
     }
 
+    public function index()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses');
+        $courses = $builder->get()->getResultArray();
+
+        return view('courses/index', ['courses' => $courses]);
+    }
+
     /**
      * Handle AJAX enrollment request.
      * Expects POST with 'course_id'.
@@ -81,5 +90,32 @@ class Course extends Controller
         }
     }
 
-    // Add other methods here if the controller already has them (e.g., index(), show())
+    public function search()
+    {
+        $request = service('request');
+        $term = $request->getGet('term'); // or $request->getPost('term')
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses');
+
+        if (!empty($term)) {
+            $builder->groupStart()
+                    ->like('title', $term)
+                    ->orLike('description', $term)
+                    ->groupEnd();
+        }
+
+        $query = $builder->get();
+        $results = $query->getResultArray();
+
+        // If AJAX, return JSON
+        if ($request->isAJAX()) {
+            return $this->response->setJSON($results);
+        }
+
+        // Otherwise load index view (adjust if needed)
+        return view('courses/index', ['courses' => $results]);
+    }
+
+// Add other methods here if the controller already has them (e.g., index(), show())
 }
