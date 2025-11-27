@@ -31,4 +31,5 @@ $routes->get('/notifications', 'Notifications::get');
 $routes->post('/notifications/mark_read/(:num)', 'Notifications::mark_as_read/$1');
 
 $routes->get('courses', 'Course::index');
-$routes->get('courses/search', 'Course::search');
+$routes->get('course/search', 'Course::search');
+$routes->post('course/search', 'Course::search');

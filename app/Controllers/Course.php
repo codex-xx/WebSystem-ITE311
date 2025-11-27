@@ -93,7 +93,7 @@ class Course extends Controller
     public function search()
     {
         $request = service('request');
-        $term = $request->getGet('term'); // or $request->getPost('term')
+        $term = $request->getVar('term');
 
         $db = \Config\Database::connect();
         $builder = $db->table('courses');

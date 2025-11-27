@@ -61,6 +61,7 @@
           <li class="nav-item"><a class="nav-link" href="<?= base_url('/') ?>">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="<?= base_url('/about') ?>">About</a></li>
           <li class="nav-item"><a class="nav-link" href="<?= base_url('/contact') ?>">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('/courses') ?>">Courses</a></li>
           <?php if ($session->get('isLoggedIn')): ?>
             <li class="nav-item"><a class="nav-link" href="<?= base_url('/dashboard') ?>">Dashboard</a></li>
           <?php else: ?>

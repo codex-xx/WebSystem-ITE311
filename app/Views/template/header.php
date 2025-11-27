@@ -61,6 +61,7 @@
           <li class="nav-item"><a class="nav-link" href="<?= base_url('/') ?>">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="<?= base_url('/about') ?>">About</a></li>
           <li class="nav-item"><a class="nav-link" href="<?= base_url('/contact') ?>">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('/courses') ?>">Courses</a></li>
           <!-- Notifications Dropdown -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
