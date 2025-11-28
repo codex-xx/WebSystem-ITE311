@@ -237,7 +237,7 @@
                                         <h6 class="mb-1"><?= esc($course['title'] ?? 'Unknown Course') ?></h6>
                                         <p class="mb-1 text-muted"><?= esc($course['description'] ?? 'No description available.') ?></p>
                                     </div>
-                                    <button class="btn btn-primary btn-sm enroll-btn" 
+                                    <button class="btn btn-primary btn-sm enroll-btn"
                                             data-course-id="<?= esc($course['id']) ?>"
                                             data-course-name="<?= esc($course['title'] ?? 'Unknown Course') ?>"
                                             data-course-desc="<?= esc($course['description'] ?? 'No description available.') ?>"

@@ -1,8 +1,16 @@
-<?= $this->extend('template') ?>
+<?= $this->extend('template/header') ?>
 
 <?= $this->section('title') ?>Courses<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+
+<div class="row mb-3">
+  <div class="col-12 mb-3">
+    <a href="<?= base_url('dashboard') ?>" class="btn btn-secondary">
+      <i class="bi bi-arrow-left"></i> Back to Dashboard
+    </a>
+  </div>
+</div>
 
 <div class="row mb-3">
   <div class="col-md-10">
@@ -18,9 +26,14 @@
 <div id="coursesList" class="list-group">
   <?php if (!empty($courses)): ?>
     <?php foreach ($courses as $c): ?>
-      <div class="list-group-item course-item" data-title="<?= esc(strtolower($c['title'])) ?>" data-desc="<?= esc(strtolower($c['description'])) ?>">
-        <h5><?= esc($c['title']) ?></h5>
-        <p><?= esc($c['description']) ?></p>
+      <div class="list-group-item course-item" data-title="<?= esc(strtolower($c['title'])) ?>" data-desc="<?= esc(strtolower($c['description'])) ?>" data-course-id="<?= esc($c['id']) ?>">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h5><?= esc($c['title']) ?></h5>
+            <p><?= esc($c['description']) ?></p>
+          </div>
+          <button class="btn btn-success enroll-btn" data-course-id="<?= esc($c['id']) ?>">Enroll</button>
+        </div>
       </div>
     <?php endforeach; ?>
   <?php else: ?>
@@ -49,9 +62,14 @@ $(document).ready(function(){
         $('#coursesList').html('<div class="alert alert-warning">No courses match "' + $('<div>').text(term).html() + '".</div>');
       } else {
         data.forEach(function(c){
-          const item = '<div class="list-group-item course-item" data-title="'+(c.title ? c.title.toLowerCase() : '')+'" data-desc="'+(c.description ? c.description.toLowerCase() : '')+'">'
+          const item = '<div class="list-group-item course-item" data-title="'+(c.title ? c.title.toLowerCase() : '')+'" data-desc="'+(c.description ? c.description.toLowerCase() : '')+'" data-course-id="'+c.id+'">'
+                     + '<div class="d-flex justify-content-between align-items-center">'
+                     + '<div>'
                      + '<h5>'+ $('<div>').text(c.title).html() +'</h5>'
                      + '<p>'+ $('<div>').text(c.description).html() +'</p>'
+                     + '</div>'
+                     + '<button class="btn btn-success enroll-btn" data-course-id="'+c.id+'">Enroll</button>'
+                     + '</div>'
                      + '</div>';
           $('#coursesList').append(item);
         });
@@ -107,6 +125,37 @@ $(document).ready(function(){
       $('#coursesList .course-item').show();
       $('#searchStatus').text('');
     }
+  });
+
+  // Enroll button handler
+  $(document).on('click', '.enroll-btn', function(){
+    const button = $(this);
+    const courseId = button.data('course-id');
+
+    if (!courseId) {
+      alert('Error: No course ID found.');
+      return;
+    }
+
+    button.prop('disabled', true).text('Enrolling...');
+
+    $.ajax({
+      url: '<?= site_url("course/enroll") ?>',
+      method: 'POST',
+      data: { course_id: courseId },
+      dataType: 'json'
+    }).done(function(response){
+      if (response.success) {
+        alert('Success: ' + response.message);
+        button.text('Enrolled').removeClass('btn-success').addClass('btn-secondary').prop('disabled', true);
+      } else {
+        alert('Error: ' + response.message);
+        button.prop('disabled', false).text('Enroll');
+      }
+    }).fail(function(xhr, status, err){
+      alert('Enrollment failed: ' + status);
+      button.prop('disabled', false).text('Enroll');
+    });
   });
 });
 </script>
