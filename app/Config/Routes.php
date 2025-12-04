@@ -16,8 +16,12 @@ $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::login');
 $routes->get('logout', 'Auth::logout');
 $routes->get('dashboard', 'Auth::dashboard');
+$routes->get('user', 'Auth::users');
+$routes->get('user/(:num)', 'Auth::getUser/$1');
+$routes->post('user/update', 'Auth::updateUser');
+$routes->post('user/delete/(:num)', 'Auth::deleteUser/$1');
 
-$routes->get('/admin/dashboard', 'Admin::dashboard');
+
 $routes->post('/course/enroll', 'Course::enroll');
 
 // Materials routes
@@ -31,5 +35,8 @@ $routes->get('/notifications', 'Notifications::get');
 $routes->post('/notifications/mark_read/(:num)', 'Notifications::mark_as_read/$1');
 
 $routes->get('courses', 'Course::index');
+$routes->get('manage_course', 'Course::manage');
+$routes->get('course/manage/(:num)', 'Course::viewMaterials/$1');
+$routes->get('notifications', 'Notifications::index');
 $routes->get('course/search', 'Course::search');
 $routes->post('course/search', 'Course::search');

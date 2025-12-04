@@ -27,9 +27,10 @@ class UserModel extends Model
     // Validation - Only validate fields that exist in your database
     protected $validationRules = [
         'name' => 'required|min_length[3]|max_length[100]',
-        'email' => 'required|valid_email|is_unique[users.email]',
+        'email' => 'required|valid_email',
         'password' => 'required|min_length[6]'
         // Removed role validation since we're setting it programmatically
+        // Email uniqueness check handled in controller for update operations
     ];
 
     protected $validationMessages = [

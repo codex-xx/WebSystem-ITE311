@@ -117,5 +117,69 @@ class Course extends Controller
         return view('courses/index', ['courses' => $results]);
     }
 
-// Add other methods here if the controller already has them (e.g., index(), show())
+    /**
+     * Display course management page for admin and teachers.
+     * Shows all courses where you can upload materials.
+     */
+    public function manage()
+    {
+        $session = session();
+
+        // Check if user is logged in and has permission (admin or teacher)
+        if (!$session->get('isLoggedIn') || !in_array($session->get('role'), ['admin', 'teacher'])) {
+            $session->setFlashdata('error', 'Access denied. Only admins and teachers can manage course materials.');
+            return redirect()->to('/dashboard');
+        }
+
+        // Get all courses
+        $db = \Config\Database::connect();
+        $courses = $db->table('courses')->get()->getResultArray();
+
+        $data = [
+            'courses' => $courses,
+            'user_name' => $session->get('user_name'),
+            'role' => $session->get('role')
+        ];
+
+        return view('materials/upload', $data);
+    }
+
+    /**
+     * Display materials for a specific course.
+     * Shows all uploaded materials for the given course ID.
+     */
+    public function viewMaterials($courseId)
+    {
+        $session = session();
+
+        // Check if user is logged in and has permission (admin or teacher)
+        if (!$session->get('isLoggedIn') || !in_array($session->get('role'), ['admin', 'teacher'])) {
+            $session->setFlashdata('error', 'Access denied. Only admins and teachers can view course materials.');
+            return redirect()->to('/dashboard');
+        }
+
+        // Get all courses for navigation + specific course
+        $db = \Config\Database::connect();
+        $courses = $db->table('courses')->get()->getResultArray();
+        $course = $db->table('courses')->where('id', $courseId)->get()->getRow();
+
+        if (!$course) {
+            $session->setFlashdata('error', 'Course not found.');
+            return redirect()->to('/dashboard');
+        }
+
+        // Get materials for this course
+        $materialModel = new \App\Models\MaterialModel();
+        $materials = $materialModel->getMaterialsByCourse($courseId);
+
+        $data = [
+            'courses' => $courses, // For navigation
+            'current_course' => $course, // For displaying current course
+            'materials' => $materials, // Materials for this course
+            'user_name' => $session->get('user_name'),
+            'role' => $session->get('role')
+        ];
+
+        return view('materials/upload', $data);
+    }
 }

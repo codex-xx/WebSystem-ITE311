@@ -28,17 +28,6 @@ class MaterialModel extends Model
     }
 
     /**
-     * Get all materials for a specific course.
-     *
-     * @param int $course_id The course's ID.
-     * @return array Array of material records.
-     */
-    public function getMaterialsByCourse($course_id)
-    {
-        return $this->where('course_id', $course_id)->findAll();
-    }
-
-    /**
      * Get a material by ID.
      *
      * @param int $material_id The material's ID.
@@ -47,6 +36,30 @@ class MaterialModel extends Model
     public function getMaterialById($material_id)
     {
         return $this->find($material_id);
+    }
+
+    /**
+     * Get the count of materials for a specific course.
+     *
+     * @param int $courseId
+     * @return int
+     */
+    public function getMaterialsCountByCourse($courseId)
+    {
+        return $this->where('course_id', $courseId)->countAllResults();
+    }
+
+    /**
+     * Get all materials for a specific course.
+     *
+     * @param int $courseId
+     * @return array
+     */
+    public function getMaterialsByCourse($courseId)
+    {
+        return $this->where('course_id', $courseId)
+                    ->orderBy('created_at', 'DESC')
+                    ->findAll();
     }
 
     /**

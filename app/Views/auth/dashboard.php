@@ -2,42 +2,15 @@
 
 <?= $this->section('content') ?>
 
-    <!-- ✅ Page Content -->
-    <div class="flex-grow-1">
-        <!-- Top Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 shadow-sm">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar" aria-controls="topNavbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="topNavbar">
-        <!-- Left side (Welcome + Role) -->
-        <ul class="navbar-nav me-auto d-flex align-items-center">
-            <li class="nav-item me-3 text-white">
-                Welcome, <strong><?= esc($user_name) ?></strong>
-            </li>
-            <li class="nav-item me-3 text-muted">
-                Role: <strong><?= esc($role) ?></strong>
-            </li>
-        </ul>
-
-        <!-- Right side (Logout button only) -->
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-                <a href="<?= base_url('logout') ?>" class="btn btn-danger btn-sm">
-                    <i class="bi bi-box-arrow-right"></i> Logout
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-
         <!-- Main Content -->
         <div class="container-fluid mt-4">
 
             <!-- Admin Dashboard -->
             <?php if ($role === 'admin'): ?>
+                <div class="mb-4">
+                    <h2 class="text-primary mb-4"><i class="bi bi-people-fill"></i> User Management</h2>
+                </div>
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card text-white bg-primary mb-3 shadow-sm">
@@ -75,36 +48,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Courses Management for Admins -->
-                <div class="card shadow-sm mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Course Management</h5>
-                        <p class="text-muted">Upload materials for courses</p>
-                        <?php
-                        $db = \Config\Database::connect();
-                        $courses = $db->table('courses')->get()->getResultArray();
-                        if (!empty($courses)): ?>
-                            <div class="row">
-                                <?php foreach ($courses as $course): ?>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h6 class="card-title"><?= esc($course['title']) ?></h6>
-                                                <p class="card-text"><?= esc($course['description'] ?? 'No description available.') ?></p>
-                                                <a href="<?= base_url('/admin/course/' . $course['id'] . '/upload') ?>" class="btn btn-primary btn-sm">
-                                                    <i class="bi bi-upload"></i> Upload Material
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php else: ?>
-                            <p class="text-muted">No courses available.</p>
-                        <?php endif; ?>
-                    </div>
-                </div>
             <?php endif; ?>
 
             <!-- Teacher Dashboard -->
@@ -132,36 +75,6 @@
                                 <?php endif; ?>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-
-                <!-- Courses Management for Teachers -->
-                <div class="card shadow-sm mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Course Management</h5>
-                        <p class="text-muted">Upload materials for courses</p>
-                        <?php
-                        $db = \Config\Database::connect();
-                        $courses = $db->table('courses')->get()->getResultArray();
-                        if (!empty($courses)): ?>
-                            <div class="row">
-                                <?php foreach ($courses as $course): ?>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h6 class="card-title"><?= esc($course['title']) ?></h6>
-                                                <p class="card-text"><?= esc($course['description'] ?? 'No description available.') ?></p>
-                                                <a href="<?= base_url('/admin/course/' . $course['id'] . '/upload') ?>" class="btn btn-primary btn-sm">
-                                                    <i class="bi bi-upload"></i> Upload Material
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php else: ?>
-                            <p class="text-muted">No courses available.</p>
-                        <?php endif; ?>
                     </div>
                 </div>
             <?php endif; ?>
@@ -349,6 +262,4 @@
         });
     </script>
     <?php endif; ?>
-
-</div>
 <?= $this->endSection() ?>

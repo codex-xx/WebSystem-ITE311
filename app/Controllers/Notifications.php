@@ -13,6 +13,31 @@ class Notifications extends Controller
     }
 
     /**
+     * Display notifications page for the current user.
+     * Shows all notifications with read/unread status.
+     */
+    public function index()
+    {
+        $userId = session()->get('user_id');
+        if (!$userId) {
+            return redirect()->to('/login');
+        }
+
+        $notificationModel = new NotificationModel();
+        $notifications = $notificationModel->getNotificationsForUser($userId);
+        $unreadCount = $notificationModel->getUnreadCount($userId);
+
+        $data = [
+            'notifications' => $notifications,
+            'unread_count' => $unreadCount,
+            'user_name' => session()->get('user_name'),
+            'role' => session()->get('role')
+        ];
+
+        return view('notifications/index', $data);
+    }
+
+    /**
      * Get current user's unread notification count and list.
      * Returns JSON response.
      */
