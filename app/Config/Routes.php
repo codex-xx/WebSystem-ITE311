@@ -21,7 +21,9 @@ $routes->get('dashboard', 'Auth::dashboard');
 $routes->get('user', 'Auth::users');
 $routes->get('user/(:num)', 'Auth::getUser/$1');
 $routes->post('user/update', 'Auth::updateUser');
-$routes->post('user/delete/(:num)', 'Auth::deleteUser/$1');
+$routes->post('user/deactivate/(:num)', 'Auth::deactivateUser/$1');
+$routes->post('user/activate/(:num)', 'Auth::activateUser/$1');
+$routes->post('user/add', 'Auth::addUser');
 $routes->get('/teacher/students', 'Auth::teacherStudents');
 
 

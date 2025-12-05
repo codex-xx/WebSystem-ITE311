@@ -70,6 +70,11 @@ class Auth extends Controller
                     $user  = $model->where('email', $email)->first();
 
                     if ($user && password_verify($password, $user['password'])) {
+                        // Check if user account is active
+                        if ($user['status'] !== 'active') {
+                            $session->setFlashdata('login_error', 'This user account has been deleted or deactivated.');
+                            return redirect()->to(base_url('login'));
+                        }
                         $sessionData = [
                             'user_id'    => $user['id'],
                             'user_name'  => $user['name'] ?? $user['email'],
@@ -393,9 +398,9 @@ class Auth extends Controller
     }
 
     /**
-     * Handle user deletion via AJAX.
+     * Handle user deactivation via AJAX.
      */
-    public function deleteUser($userId)
+    public function deactivateUser($userId)
     {
         $session = session();
 
@@ -412,18 +417,131 @@ class Auth extends Controller
             return $this->response->setJSON(['success' => false, 'message' => 'User not found'])->setStatusCode(404);
         }
 
-        // Prevent admin from deleting themselves
+        // Prevent admin from deactivating themselves
         if ($userId == $session->get('user_id')) {
-            return $this->response->setJSON(['success' => false, 'message' => 'Cannot delete your own account'])->setStatusCode(400);
+            return $this->response->setJSON(['success' => false, 'message' => 'Cannot deactivate your own account'])->setStatusCode(400);
+        }
+
+        // Prevent deactivation of admin users
+        if ($user['role'] === 'admin') {
+            return $this->response->setJSON(['success' => false, 'message' => 'Cannot deactivate admin users'])->setStatusCode(400);
+        }
+
+        // Check if user is already deactivated
+        if (($user['status'] ?? 'active') === 'inactive') {
+            return $this->response->setJSON(['success' => false, 'message' => 'User is already deactivated'])->setStatusCode(400);
         }
 
         if ($userModel->update($userId, ['status' => 'inactive'])) {
             return $this->response->setJSON([
                 'success' => true,
-                'message' => 'User deleted successfully'
+                'message' => 'User deactivated successfully'
             ]);
         } else {
-            return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete user'])->setStatusCode(500);
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to deactivate user'])->setStatusCode(500);
+        }
+    }
+
+    /**
+     * Handle user activation via AJAX.
+     */
+    public function activateUser($userId)
+    {
+        $session = session();
+
+        // Check if user is logged in and is admin
+        if (!$session->get('isLoggedIn') || $session->get('role') !== 'admin') {
+            return $this->response->setJSON(['success' => false, 'message' => 'Access denied'])->setStatusCode(403);
+        }
+
+        $userModel = new UserModel();
+
+        // Check if user exists
+        $user = $userModel->find($userId);
+        if (!$user) {
+            return $this->response->setJSON(['success' => false, 'message' => 'User not found'])->setStatusCode(404);
+        }
+
+        // Check if user is already active
+        if (($user['status'] ?? 'active') === 'active') {
+            return $this->response->setJSON(['success' => false, 'message' => 'User is already active'])->setStatusCode(400);
+        }
+
+        if ($userModel->update($userId, ['status' => 'active'])) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'User activated successfully'
+            ]);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to activate user'])->setStatusCode(500);
+        }
+    }
+
+    /**
+     * Handle user creation via AJAX (Admin only).
+     */
+    public function addUser()
+    {
+        $session = session();
+
+        // Check if user is logged in and is admin
+        if (!$session->get('isLoggedIn') || $session->get('role') !== 'admin') {
+            return $this->response->setJSON(['success' => false, 'message' => 'Access denied'])->setStatusCode(403);
+        }
+
+        if ($this->request->getMethod() === 'POST') {
+            $rules = [
+                'name'     => 'required|min_length[3]|max_length[100]',
+                'email'    => 'required|valid_email',
+                'password' => 'required',
+                'role'     => 'required|in_list[admin,teacher,student]'
+            ];
+
+            if ($this->validate($rules)) {
+                try {
+                    $userModel = new UserModel();
+
+                    // Check if email already exists
+                    $existingUser = $userModel->where('email', $this->request->getPost('email'))->first();
+                    if ($existingUser) {
+                        return $this->response->setJSON(['success' => false, 'message' => 'Email is already in use'])->setStatusCode(400);
+                    }
+
+                    $data = [
+                        'name'     => trim($this->request->getPost('name')),
+                        'email'    => $this->request->getPost('email'),
+                        'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
+                        'role'     => $this->request->getPost('role'),
+                        'status'   => 'active' // New users are active by default
+                    ];
+
+                    if ($userModel->insert($data)) {
+                        // Set success message for display after page reload
+                        $session->setFlashdata('success', 'User "' . $data['name'] . '" has been created successfully with role "' . $data['role'] . '".');
+
+                        return $this->response->setJSON([
+                            'success' => true,
+                            'message' => 'User created successfully',
+                            'user' => [
+                                'id' => $userModel->insertID(),
+                                'name' => $data['name'],
+                                'email' => $data['email'],
+                                'role' => $data['role'],
+                                'status' => $data['status'],
+                                'created_at' => date('Y-m-d H:i:s')
+                            ]
+                        ]);
+                    } else {
+                        return $this->response->setJSON(['success' => false, 'message' => 'Failed to create user'])->setStatusCode(500);
+                    }
+                } catch (\Exception $e) {
+                    return $this->response->setJSON(['success' => false, 'message' => 'Error: ' . $e->getMessage()])->setStatusCode(500);
+                }
+            } else {
+                return $this->response->setJSON(['success' => false, 'message' => implode(', ', $this->validator->getErrors())])->setStatusCode(400);
+            }
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid request method'])->setStatusCode(405);
         }
     }
 

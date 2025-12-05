@@ -4,14 +4,7 @@
 
 <div class="container-fluid mt-4">
 
-    <!-- Back to Dashboard -->
-    <div class="row mb-3">
-        <div class="col-12 mb-3">
-            <a href="<?= base_url('dashboard') ?>" class="btn btn-secondary">
-                <i class="bi bi-arrow-left"></i> Back to Dashboard
-            </a>
-        </div>
-    </div>
+
 
     <!-- Students Header -->
     <div class="mb-4">
@@ -52,8 +45,6 @@
             </div>
         </div>
     <?php endif; ?>
-
-</div>
 
 </div>
 

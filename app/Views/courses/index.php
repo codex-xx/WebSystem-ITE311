@@ -1,16 +1,14 @@
+<?php if (session()->get('isLoggedIn')): ?>
 <?= $this->extend('template/header') ?>
+<?php else: ?>
+<?= $this->extend('template') ?>
+<?php endif; ?>
 
 <?= $this->section('title') ?>Courses<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
-<div class="row mb-3">
-  <div class="col-12 mb-3">
-    <a href="<?= base_url('dashboard') ?>" class="btn btn-secondary">
-      <i class="bi bi-arrow-left"></i> Back to Dashboard
-    </a>
-  </div>
-</div>
+
 
 <div class="row mb-3">
   <div class="col-md-10">
