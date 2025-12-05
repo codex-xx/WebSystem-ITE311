@@ -19,15 +19,12 @@ $userName = $user_name ?? session()->get('user_name');
 <div class="container-fluid mt-4">
     <?php if ($hasUsers): ?>
         <!-- User Management Interface -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="mb-4">
             <h2 class="text-primary mb-0"><i class="bi bi-people"></i> User Management</h2>
-            <a href="/dashboard" class="btn btn-secondary">
-                <i class="bi bi-arrow-left"></i> Back to Dashboard
-            </a>
         </div>
 
         <div class="mb-4">
-            <p class="text-muted">Manage users: edit details and delete user accounts.</p>
+            <p class="text-muted">Manage users: edit details, change roles, and delete user accounts. Deleted users remain in the list but are marked as inactive.</p>
         </div>
 
         <?php if (session()->getFlashdata('success')): ?>
@@ -54,30 +51,39 @@ $userName = $user_name ?? session()->get('user_name');
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
+                                <th>Status</th>
                                 <th>Created</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($users as $user): ?>
-                                <tr data-user-id="<?= $user['id'] ?>">
+                                <tr data-user-id="<?= $user['id'] ?>" style="<?php if (($user['status'] ?? 'active') === 'inactive'): ?>opacity: 0.6;<?php endif; ?>">
                                     <td class="text-center align-middle">
                                         <strong><?= esc($user['id']) ?></strong>
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm user-name"
-                                               value="<?= esc($user['name']) ?>" data-original="<?= esc($user['name']) ?>">
+                                               value="<?= esc($user['name']) ?>" data-original="<?= esc($user['name']) ?>" <?php if (($user['status'] ?? 'active') === 'inactive'): ?>disabled<?php endif; ?>>
                                     </td>
                                     <td>
                                         <input type="email" class="form-control form-control-sm user-email"
-                                               value="<?= esc($user['email']) ?>" data-original="<?= esc($user['email']) ?>">
+                                               value="<?= esc($user['email']) ?>" data-original="<?= esc($user['email']) ?>" <?php if (($user['status'] ?? 'active') === 'inactive'): ?>disabled<?php endif; ?>>
                                     </td>
                                     <td>
-                                        <select class="form-control form-control-sm user-role" data-original="<?= esc($user['role']) ?>">
-                                            <option value="student" <?= $user['role'] === 'student' ? 'selected' : '' ?>>Student</option>
-                                            <option value="teacher" <?= $user['role'] === 'teacher' ? 'selected' : '' ?>>Teacher</option>
-                                            <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
+                                        <select class="form-control form-control-sm user-role" data-original="<?= esc($user['role']) ?>" <?= ($user['role'] === 'admin' || ($user['status'] ?? 'active') === 'inactive') ? 'disabled' : '' ?>>
+                                            <?php if ($user['role'] === 'admin'): ?>
+                                                <option value="admin" selected>Admin</option>
+                                            <?php else: ?>
+                                                <option value="student" <?= $user['role'] === 'student' ? 'selected' : '' ?>>Student</option>
+                                                <option value="teacher" <?= $user['role'] === 'teacher' ? 'selected' : '' ?>>Teacher</option>
+                                            <?php endif; ?>
                                         </select>
+                                    </td>
+                                    <td class="align-middle">
+                                        <span class="badge <?php if (($user['status'] ?? 'active') === 'active'): ?>bg-success<?php else: ?>bg-danger<?php endif; ?>">
+                                            <?= esc(($user['status'] ?? 'active') === 'active' ? 'Active' : 'Deleted') ?>
+                                        </span>
                                     </td>
                                     <td class="text-muted small align-middle">
                                         <?= date('M j, Y', strtotime($user['created_at'])) ?>
@@ -86,13 +92,13 @@ $userName = $user_name ?? session()->get('user_name');
                                         <div class="btn-group" role="group">
                                             <button class="btn btn-success btn-sm save-user-btn"
                                                     data-user-id="<?= $user['id'] ?>"
-                                                    onclick="saveUser(<?= $user['id'] ?>, this)">
+                                                    onclick="saveUser(<?= $user['id'] ?>, this)" <?php if (($user['status'] ?? 'active') === 'inactive'): ?>disabled<?php endif; ?>>
                                                 <i class="bi bi-check"></i> Save
                                             </button>
                                             <button class="btn btn-sm btn-outline-danger delete-user-btn"
                                                     data-user-id="<?= $user['id'] ?>"
                                                     data-user-name="<?= esc($user['name']) ?>"
-                                                    onclick="deleteUser(<?= $user['id'] ?>, '<?= esc($user['name']) ?>')">
+                                                    onclick="deleteUser(<?= $user['id'] ?>, '<?= esc($user['name']) ?>')" <?php if (($user['status'] ?? 'active') === 'inactive'): ?>disabled<?php endif; ?>>
                                                 <i class="bi bi-trash"></i> Delete
                                             </button>
                                         </div>
@@ -176,7 +182,8 @@ function saveUser(userId, button) {
     var row = button.closest('tr');
     var name = row.querySelector('.user-name').value.trim();
     var email = row.querySelector('.user-email').value.trim();
-    var role = row.querySelector('.user-role').value;
+    var roleSelect = row.querySelector('.user-role');
+    var role = roleSelect.disabled ? roleSelect.getAttribute('data-original') : roleSelect.value;
 
     // Validate required fields
     if (!name || !email || !role) {

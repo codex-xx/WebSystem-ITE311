@@ -63,6 +63,24 @@ class MaterialModel extends Model
     }
 
     /**
+     * Get all materials for courses the user is enrolled in.
+     *
+     * @param int $userId
+     * @return array
+     */
+    public function getMaterialsByUserId($userId)
+    {
+        $builder = $this->db->table($this->table);
+        $builder->select('materials.*, courses.title as course_name');
+        $builder->join('courses', 'courses.id = materials.course_id');
+        $builder->join('enrollments', 'enrollments.course_id = materials.course_id');
+        $builder->where('enrollments.user_id', $userId);
+        $builder->orderBy('materials.created_at', 'DESC');
+
+        return $builder->get()->getResultArray();
+    }
+
+    /**
      * Delete a material by ID.
      *
      * @param int $material_id The material's ID.

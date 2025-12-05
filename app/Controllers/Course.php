@@ -19,7 +19,22 @@ class Course extends Controller
         $builder = $db->table('courses');
         $courses = $builder->get()->getResultArray();
 
-        return view('courses/index', ['courses' => $courses]);
+        // Check enrollment status for logged-in students
+        $enrollmentStatuses = [];
+        $user_id = session()->get('user_id');
+        $user_role = session()->get('role');
+        if ($user_id && $user_role === 'student') {
+            $enrollmentModel = new EnrollmentModel();
+            foreach ($courses as $course) {
+                $enrollmentStatuses[$course['id']] = $enrollmentModel->isAlreadyEnrolled($user_id, $course['id']);
+            }
+        }
+
+        return view('courses/index', [
+            'courses' => $courses,
+            'enrollmentStatuses' => $enrollmentStatuses,
+            'user_role' => $user_role
+        ]);
     }
 
     /**
@@ -108,13 +123,32 @@ class Course extends Controller
         $query = $builder->get();
         $results = $query->getResultArray();
 
-        // If AJAX, return JSON
+        // Check enrollment status for logged-in students
+        $enrollmentStatuses = [];
+        $user_id = session()->get('user_id');
+        $user_role = session()->get('role');
+        if ($user_id && $user_role === 'student') {
+            $enrollmentModel = new EnrollmentModel();
+            foreach ($results as $course) {
+                $enrollmentStatuses[$course['id']] = $enrollmentModel->isAlreadyEnrolled($user_id, $course['id']);
+            }
+        }
+
+        // If AJAX, return JSON with enrollment statuses
         if ($request->isAJAX()) {
-            return $this->response->setJSON($results);
+            return $this->response->setJSON([
+                'courses' => $results,
+                'enrollmentStatuses' => $enrollmentStatuses,
+                'user_role' => $user_role
+            ]);
         }
 
         // Otherwise load index view (adjust if needed)
-        return view('courses/index', ['courses' => $results]);
+        return view('courses/index', [
+            'courses' => $results,
+            'enrollmentStatuses' => $enrollmentStatuses,
+            'user_role' => $user_role
+        ]);
     }
 
     /**
@@ -172,10 +206,19 @@ class Course extends Controller
         $materialModel = new \App\Models\MaterialModel();
         $materials = $materialModel->getMaterialsByCourse($courseId);
 
+        // Get assignments for this course
+        $assignmentModel = new \App\Models\AssignmentModel();
+        $assignments = $assignmentModel->where('course_id', $courseId)
+                                       ->join('users', 'users.id = assignments.user_id')
+                                       ->select('assignments.*, users.name as student_name, users.email as student_email')
+                                       ->orderBy('assignments.submitted_at', 'DESC')
+                                       ->findAll();
+
         $data = [
             'courses' => $courses, // For navigation
             'current_course' => $course, // For displaying current course
             'materials' => $materials, // Materials for this course
+            'assignments' => $assignments, // Assignments for this course
             'user_name' => $session->get('user_name'),
             'role' => $session->get('role')
         ];

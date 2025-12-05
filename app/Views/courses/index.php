@@ -26,13 +26,21 @@
 <div id="coursesList" class="list-group">
   <?php if (!empty($courses)): ?>
     <?php foreach ($courses as $c): ?>
+      <?php
+        $isEnrolled = isset($enrollmentStatuses[$c['id']]) ? $enrollmentStatuses[$c['id']] : false;
+        $showEnrollButton = (!$isEnrolled && $user_role === 'student');
+      ?>
       <div class="list-group-item course-item" data-title="<?= esc(strtolower($c['title'])) ?>" data-desc="<?= esc(strtolower($c['description'])) ?>" data-course-id="<?= esc($c['id']) ?>">
         <div class="d-flex justify-content-between align-items-center">
           <div>
             <h5><?= esc($c['title']) ?></h5>
             <p><?= esc($c['description']) ?></p>
           </div>
-          <button class="btn btn-success enroll-btn" data-course-id="<?= esc($c['id']) ?>">Enroll</button>
+          <?php if ($showEnrollButton): ?>
+            <button class="btn btn-success enroll-btn" data-course-id="<?= esc($c['id']) ?>">Enroll</button>
+          <?php elseif ($isEnrolled): ?>
+            <button class="btn btn-secondary enroll-btn" data-course-id="<?= esc($c['id']) ?>" disabled>Enrolled</button>
+          <?php endif; ?>
         </div>
       </div>
     <?php endforeach; ?>
@@ -58,23 +66,31 @@ $(document).ready(function(){
       dataType: 'json'
     }).done(function(data){
       $('#coursesList').empty();
-      if (!data || data.length === 0) {
+      if (!data.courses || data.courses.length === 0) {
         $('#coursesList').html('<div class="alert alert-warning">No courses match "' + $('<div>').text(term).html() + '".</div>');
       } else {
-        data.forEach(function(c){
+        data.courses.forEach(function(c){
+          const isEnrolled = data.enrollmentStatuses && data.enrollmentStatuses[c.id];
+          const showEnrollButton = (!isEnrolled && data.user_role === 'student');
+          let buttonHtml = '';
+          if (showEnrollButton) {
+            buttonHtml = '<button class="btn btn-success enroll-btn" data-course-id="'+c.id+'">Enroll</button>';
+          } else if (isEnrolled) {
+            buttonHtml = '<button class="btn btn-secondary enroll-btn" data-course-id="'+c.id+'" disabled>Enrolled</button>';
+          }
           const item = '<div class="list-group-item course-item" data-title="'+(c.title ? c.title.toLowerCase() : '')+'" data-desc="'+(c.description ? c.description.toLowerCase() : '')+'" data-course-id="'+c.id+'">'
                      + '<div class="d-flex justify-content-between align-items-center">'
                      + '<div>'
                      + '<h5>'+ $('<div>').text(c.title).html() +'</h5>'
                      + '<p>'+ $('<div>').text(c.description).html() +'</p>'
                      + '</div>'
-                     + '<button class="btn btn-success enroll-btn" data-course-id="'+c.id+'">Enroll</button>'
+                     + buttonHtml
                      + '</div>'
                      + '</div>';
           $('#coursesList').append(item);
         });
       }
-      $('#searchStatus').text('Showing ' + data.length + ' result(s).');
+      $('#searchStatus').text('Showing ' + data.courses.length + ' result(s).');
     }).fail(function(xhr, status, err){
       $('#searchStatus').text('Search failed: ' + status);
     });

@@ -92,6 +92,60 @@ Course Material Management - ITE311
         <?php endforeach; ?>
     </div>
 
+    <?php if (isset($assignments) && !empty($assignments)): ?>
+        <!-- Student Assignments Section -->
+        <div class="mt-5">
+            <h3 class="text-primary mb-4">
+                <i class="bi bi-file-earmark-check-fill"></i>
+                Student Submissions for: <?= esc($current_course->title ?? '') ?>
+            </h3>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th><i class="bi bi-person"></i> Student Name</th>
+                                    <th><i class="bi bi-envelope"></i> Email</th>
+                                    <th><i class="bi bi-file-earmark-text"></i> Assignment File</th>
+                                    <th><i class="bi bi-calendar"></i> Submitted On</th>
+                                    <th><i class="bi bi-download"></i> Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($assignments as $assignment): ?>
+                                    <tr>
+                                        <td>
+                                            <strong><?= esc($assignment['student_name']) ?></strong>
+                                        </td>
+                                        <td>
+                                            <?= esc($assignment['student_email']) ?>
+                                        </td>
+                                        <td>
+                                            <i class="bi bi-file-earmark-text-fill text-primary"></i>
+                                            <?= esc($assignment['file_name']) ?>
+                                        </td>
+                                        <td>
+                                            <?= date('M j, Y, g:i A', strtotime($assignment['submitted_at'])) ?>
+                                        </td>
+                                        <td>
+                                            <a href="<?= base_url('/assignments/download/' . $assignment['id']) ?>"
+                                               class="btn btn-sm btn-outline-primary"
+                                               title="Download Assignment">
+                                                <i class="bi bi-download"></i> Download
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <?php if (empty($courses)): ?>
         <div class="text-center py-5">
             <i class="bi bi-info-circle text-muted" style="font-size: 3rem;"></i>

@@ -15,20 +15,29 @@ $routes->post('register', 'Auth::register');
 $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::login');
 $routes->get('logout', 'Auth::logout');
+$routes->get('profile', 'Auth::profile');
+$routes->post('profile', 'Auth::profile');
 $routes->get('dashboard', 'Auth::dashboard');
 $routes->get('user', 'Auth::users');
 $routes->get('user/(:num)', 'Auth::getUser/$1');
 $routes->post('user/update', 'Auth::updateUser');
 $routes->post('user/delete/(:num)', 'Auth::deleteUser/$1');
+$routes->get('/teacher/students', 'Auth::teacherStudents');
+
 
 
 $routes->post('/course/enroll', 'Course::enroll');
 
 // Materials routes
+$routes->get('/student/materials', 'Materials::index');
+$routes->match(['get', 'post'], '/student/materials/submit/(:num)', 'Materials::submit/$1');
 $routes->get('/admin/course/(:num)/upload', 'Materials::upload/$1');
 $routes->post('/admin/course/(:num)/upload', 'Materials::upload/$1');
 $routes->get('/materials/delete/(:num)', 'Materials::delete/$1');
 $routes->get('/materials/download/(:num)', 'Materials::download/$1');
+
+// Assignments download route
+$routes->get('/assignments/download/(:num)', 'Materials::downloadAssignment/$1');
 
 // Notifications routes
 $routes->get('/notifications', 'Notifications::get');

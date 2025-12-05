@@ -27,7 +27,7 @@ class Auth extends Controller
                         'name'     => trim($this->request->getPost('name')),
                         'email'    => $this->request->getPost('email'),
                         // ✅ Hash password before saving
-                        'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                        'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
                         'role'     => $this->request->getPost('role')
                     ];
                     
@@ -54,21 +54,21 @@ class Auth extends Controller
     {
         helper(['form']);
         $session = session();
-        
+
         if ($this->request->getMethod() === 'POST') {
             $rules = [
                 'email'    => 'required|valid_email',
                 'password' => 'required'
             ];
-            
+
             if ($this->validate($rules)) {
                 $email    = $this->request->getPost('email');
-                $password = $this->request->getPost('password');
-                
+                $password = trim($this->request->getPost('password'));
+
                 try {
                     $model = new UserModel();
                     $user  = $model->where('email', $email)->first();
-                    
+
                     if ($user && password_verify($password, $user['password'])) {
                         $sessionData = [
                             'user_id'    => $user['id'],
@@ -121,6 +121,140 @@ class Auth extends Controller
         $session = session();
         $session->destroy();
         return redirect()->to('login');
+    }
+
+    public function profile()
+    {
+        helper(['form']);
+        $session = session();
+
+        // Check if user is logged in
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('/login')->with('error', 'Please login first.');
+        }
+
+        $userId = $session->get('user_id');
+        $userModel = new UserModel();
+        $user = $userModel->find($userId);
+
+        if ($this->request->getMethod() === 'POST') {
+            // Only validate password change fields since profile info is read-only
+            $rules = [
+                'current_password' => 'required',
+                'new_password' => 'required|min_length[6]',
+                'confirm_password' => 'matches[new_password]'
+            ];
+
+            if ($this->validate($rules)) {
+                // Get the form data
+                $currentPasswordInput = trim($this->request->getPost('current_password'));
+                $newPassword = trim($this->request->getPost('new_password'));
+
+                // Verify current password - be very explicit about this
+                $currentPasswordVerification = password_verify($currentPasswordInput, $user['password']);
+
+                if (!$currentPasswordVerification) {
+                    log_message('debug', 'Password change failed: current password verification failed for user ' . $userId);
+                    $session->setFlashdata('error', 'Current password is incorrect.');
+                    return redirect()->to('/profile');
+                }
+
+                // Generate new password hash - be explicit and verify format
+                try {
+                    $newPasswordHash = password_hash($newPassword, PASSWORD_BCRYPT);
+                    log_message('debug', 'New password hash generated successfully: ' . $newPasswordHash);
+                    log_message('debug', 'Hash info - Algorithm: ' . password_algos()[$newPasswordHash[0]] ?? 'Unknown', 'Length: ' . strlen($newPasswordHash));
+
+                    $updateData = [
+                        'password' => $newPasswordHash,
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ];
+
+                    log_message('debug', 'Attempting database update for user ' . $userId);
+
+                    $updateResult = $userModel->update($userId, $updateData);
+
+                    if ($updateResult) {
+                        log_message('debug', 'Password update SUCCESSFUL for user ' . $userId);
+                        $session->setFlashdata('success', 'Password changed successfully! You should now be able to log in with your new password.');
+                        return redirect()->to('/profile');
+                    } else {
+                        log_message('debug', 'Password update FAILED for user ' . $userId);
+                        $session->setFlashdata('error', 'Database update failed. Please try again.');
+                        return redirect()->to('/profile');
+                    }
+                } catch (\Exception $e) {
+                    log_message('error', 'Exception during password update: ' . $e->getMessage());
+                    $session->setFlashdata('error', 'Error updating password.');
+                    return redirect()->to('/profile');
+                }
+            } else {
+                log_message('debug', 'Password change validation FAILED: ' . implode(', ', $this->validator->getErrors()));
+                $session->setFlashdata('error', 'Validation failed: ' . implode(', ', $this->validator->getErrors()));
+                return redirect()->to('/profile');
+            }
+        }
+
+        $data = [
+            'user' => $user,
+            'user_name' => $session->get('user_name'),
+            'user_email' => $session->get('user_email'),
+            'role' => $session->get('role'),
+            'validation' => $this->validator
+        ];
+
+        return view('auth/profile', $data);
+    }
+
+    public function changePassword()
+    {
+        helper(['form']);
+        $session = session();
+
+        // Check if user is logged in
+        if (!$session->get('isLoggedIn')) {
+            return $this->response->setJSON(['success' => false, 'message' => 'You must be logged in to change your password.'])->setStatusCode(401);
+        }
+
+        $userId = $session->get('user_id');
+        $userModel = new UserModel();
+
+        if ($this->request->getMethod() === 'POST') {
+            $rules = [
+                'current_password' => 'required',
+                'new_password' => 'required|min_length[6]',
+                'confirm_password' => 'matches[new_password]'
+            ];
+
+            if ($this->validate($rules)) {
+                // Get current user data
+                $user = $userModel->find($userId);
+
+                if (!$user) {
+                    return $this->response->setJSON(['success' => false, 'message' => 'User not found.'])->setStatusCode(404);
+                }
+
+                // Verify current password
+                if (!password_verify($this->request->getPost('current_password'), $user['password'])) {
+                    return $this->response->setJSON(['success' => false, 'message' => 'Current password is incorrect.'])->setStatusCode(400);
+                }
+
+                // Update password
+                $passwordData = [
+                    'password' => password_hash($this->request->getPost('new_password'), PASSWORD_BCRYPT)
+                ];
+
+                if ($userModel->update($userId, $passwordData)) {
+                    return $this->response->setJSON(['success' => true, 'message' => 'Password changed successfully!']);
+                } else {
+                    return $this->response->setJSON(['success' => false, 'message' => 'Failed to change password. Please try again.'])->setStatusCode(500);
+                }
+            } else {
+                return $this->response->setJSON(['success' => false, 'message' => implode(', ', $this->validator->getErrors())])->setStatusCode(400);
+            }
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid request method.'])->setStatusCode(405);
+        }
     }
 
     /**
@@ -210,6 +344,11 @@ class Auth extends Controller
             return $this->response->setJSON(['success' => false, 'message' => 'User not found'])->setStatusCode(404);
         }
 
+        // Protect Admin role: Admins cannot have their role changed
+        if ($user['role'] === 'admin' && $role !== 'admin') {
+            return $this->response->setJSON(['success' => false, 'message' => 'Cannot change role of admin users'])->setStatusCode(400);
+        }
+
         // Check if email is already taken by another user
         $existingUser = $userModel->where('email', $email)->where('id !=', $userId)->first();
         if ($existingUser) {
@@ -278,7 +417,7 @@ class Auth extends Controller
             return $this->response->setJSON(['success' => false, 'message' => 'Cannot delete your own account'])->setStatusCode(400);
         }
 
-        if ($userModel->delete($userId)) {
+        if ($userModel->update($userId, ['status' => 'inactive'])) {
             return $this->response->setJSON([
                 'success' => true,
                 'message' => 'User deleted successfully'
@@ -287,6 +426,62 @@ class Auth extends Controller
             return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete user'])->setStatusCode(500);
         }
     }
+
+    /**
+     * Display students list page for teachers.
+     */
+    public function teacherStudents()
+    {
+        $session = session();
+
+        // Check if user is logged in and is teacher
+        if (!$session->get('isLoggedIn') || $session->get('role') !== 'teacher') {
+            $session->setFlashdata('error', 'Access denied. Only teachers can view students.');
+            return redirect()->to('/dashboard');
+        }
+
+        $userModel = new UserModel();
+        $students = $userModel->where('role', 'student')->findAll();
+
+        $data = [
+            'students' => $students,
+            'user_name' => $session->get('user_name'),
+            'role' => $session->get('role')
+        ];
+
+        return view('auth/students', $data);
+    }
+
+    // Test endpoint to check password hash for debugging
+    public function testPassword() {
+        $session = session();
+
+        // Only allow if logged in and is admin
+        if (!$session->get('isLoggedIn') || $session->get('role') !== 'admin') {
+            return redirect()->to('/login');
+        }
+
+        $userModel = new UserModel();
+        $users = $userModel->findAll();
+
+        $data = [];
+        foreach($users as $user) {
+            $data[] = [
+                'id' => $user['id'],
+                'email' => $user['email'],
+                'password_hash' => $user['password'],
+                'hash_starts_with' => substr($user['password'], 0, 10) . '...',
+                'created_at' => $user['created_at'],
+                'updated_at' => $user['updated_at']
+            ];
+        }
+
+        return view('auth/test_password', ['users' => $data]);
+    }
+
+
+
+
 
     public function dashboard()
     {
@@ -307,6 +502,9 @@ class Auth extends Controller
         // ✅ Step 2: Fetch role-specific data
         if ($role === 'admin') {
             $roleData['total_users'] = $model->countAll();
+            $roleData['total_students'] = $model->where('role', 'student')->where('status', 'active')->countAllResults();
+            $roleData['total_teachers'] = $model->where('role', 'teacher')->where('status', 'active')->countAllResults();
+            $roleData['total_admins'] = $model->where('role', 'admin')->where('status', 'active')->countAllResults();
             $roleData['recent_users'] = $model->orderBy('id', 'DESC')->findAll(5);
         } elseif ($role === 'teacher') {
             $roleData['students'] = $model->where('role', 'student')->findAll();

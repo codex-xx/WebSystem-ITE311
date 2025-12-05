@@ -3,16 +3,17 @@
 <?= $this->section('title') ?>About<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="text-center">
-    <h1 class="text-dark fw-bold mb-3">About Us</h1>
-    <p class="text-dark fs-5">
-        Welcome to the About page! <br>
-        Our project is built with <span class="text-danger fw-semibold">CodeIgniter 4</span>
+
+<div class="content-card">
+    <h2 class="text-center mb-4">
+        <i class="bi bi-info-circle text-primary me-2"></i>About
+    </h2>
+    <p class="text-center">
+        ITE311-ALBARINA is a Learning Management System for technology education.
     </p>
-    <h3 class="text-dark">Our Mission</h3>
-    <p class="text-dark fs-5">
-            Our goal is to build a simple, clean, and responsive web application that’s easy to use and effortless to learn
+    <p class="text-center text-muted">
+        Built with CodeIgniter 4 and modern web technologies for efficient online learning.
     </p>
-    </div>
 </div>
+
 <?= $this->endSection() ?>

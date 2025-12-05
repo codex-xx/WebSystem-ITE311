@@ -27,7 +27,7 @@
       left: 0;
       top: 0;
       bottom: 0;
-      overflow-y: auto;
+      overflow: hidden;
       z-index: 1000;
       transition: all 0.3s ease;
     }
@@ -54,28 +54,76 @@
     }
 
     .sidebar .nav-link {
-      color: #adb5bd;
+      color: #cbd3da;
       text-decoration: none;
       padding: 0.75rem 1rem;
       display: flex;
       align-items: center;
       border-radius: 5px;
+      background: linear-gradient(135deg, #495057, #5a6268);
       transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
 
     .sidebar .nav-link:hover {
-      background-color: #495057;
+      background: linear-gradient(135deg, #5a6268, #6c757d);
       color: white;
+      transform: translateX(5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 
     .sidebar .nav-link.active {
-      background-color: #0d6efd;
+      background: linear-gradient(135deg, #6c757d, #7d8286);
       color: white;
+      border-color: rgba(255,255,255,0.2);
     }
 
     .sidebar .nav-link i {
       margin-right: 0.5rem;
       font-size: 1.1rem;
+    }
+
+    /* Logout button positioning and styling */
+    .sidebar .logout-container {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+    }
+
+    .sidebar .logout-container .nav-link {
+      background: linear-gradient(135deg, #dc3545, #c82333);
+      border: 2px solid rgba(220, 53, 69, 0.3);
+      border-radius: 10px;
+      color: #fff !important;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+      transition: all 0.3s ease !important;
+    }
+
+    .sidebar .logout-container .nav-link:hover {
+      background: linear-gradient(135deg, #c82333, #a71e2a);
+      border-color: #c82333;
+      color: #fff !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(220, 53, 69, 0.4);
+    }
+
+    .sidebar .logout-container .nav-link i {
+      font-size: 1.2rem;
+      filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
+    }
+
+    .sidebar.collapsed .logout-container {
+      left: 0.5rem;
+      right: 0.5rem;
+    }
+
+    .sidebar.collapsed .logout-container .nav-link {
+      justify-content: center;
+      padding: 0.75rem 0.5rem;
     }
 
     /* Top bar styles */
@@ -168,21 +216,22 @@
     }
 
     .topbar .profile-dropdown .dropdown-toggle {
-      background: #f8f9fa;
-      border: 1px solid #dee2e6;
-      color: #495057;
-      display: flex;
-      align-items: center;
+      background: none;
+      border: none;
+      color: #ffffff;
+      position: relative;
       padding: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
       border-radius: 0.375rem;
-      font-size: 1rem;
-      transition: all 0.15s ease-in-out;
     }
 
     .topbar .profile-dropdown .dropdown-toggle:hover {
-      background: #e9ecef;
-      border-color: #adb5bd;
-      color: #212529;
+      color: #f8f9fa;
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.1);
     }
 
     .topbar .profile-dropdown .dropdown-toggle::after {
@@ -278,83 +327,83 @@
         ITE311
       </div>
 
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link <?= $currentSegment === 'dashboard' || !$currentSegment ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>">
-            <i class="bi bi-house-door"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
+      <div class="d-flex flex-column" style="height: 100%;">
+        <ul class="nav flex-column flex-grow-1">
+          <li class="nav-item">
+            <a class="nav-link <?= $currentSegment === 'dashboard' || !$currentSegment ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>">
+              <i class="bi bi-house-door"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
 
 
 
-        <!-- Admin specific navigation -->
-        <?php if ($userRole === 'admin'): ?>
-        <li class="nav-item">
-          <a class="nav-link <?= $currentSegment === 'user' ? 'active' : '' ?>" href="<?= base_url('user') ?>">
-            <i class="bi bi-people"></i>
-            <span>Users</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?= $currentSegment === 'manage_course' ? 'active' : '' ?>" href="<?= base_url('manage_course') ?>">
-            <i class="bi bi-gear"></i>
-            <span>Manage Courses</span>
-          </a>
-        </li>
-        <?php endif; ?>
+          <!-- Admin specific navigation -->
+          <?php if ($userRole === 'admin'): ?>
+          <li class="nav-item">
+            <a class="nav-link <?= $currentSegment === 'manage_course' ? 'active' : '' ?>" href="<?= base_url('manage_course') ?>">
+              <i class="bi bi-gear"></i>
+              <span>Manage Courses</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?= $currentSegment === 'user' ? 'active' : '' ?>" href="<?= base_url('user') ?>">
+              <i class="bi bi-people"></i>
+              <span>Users</span>
+            </a>
+          </li>
+          <?php endif; ?>
 
-        <!-- Teacher specific navigation -->
-        <?php if ($userRole === 'teacher'): ?>
-        <li class="nav-item">
-          <a class="nav-link <?= $currentSegment === 'courses' ? 'active' : '' ?>" href="<?= base_url('/courses') ?>">
-            <i class="bi bi-book"></i>
-            <span>Courses</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?= $uri->getSegment(2) === 'students' ? 'active' : '' ?>" href="<?= base_url('/teacher/students') ?>">
-            <i class="bi bi-people"></i>
-            <span>My Students</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?= $currentSegment === 'manage_course' ? 'active' : '' ?>" href="<?= base_url('manage_course') ?>">
-            <i class="bi bi-upload"></i>
-            <span>Manage Courses</span>
-          </a>
-        </li>
-        <?php endif; ?>
+          <!-- Teacher specific navigation -->
+          <?php if ($userRole === 'teacher'): ?>
+          <li class="nav-item">
+            <a class="nav-link <?= $currentSegment === 'courses' ? 'active' : '' ?>" href="<?= base_url('/courses') ?>">
+              <i class="bi bi-book"></i>
+              <span>Courses</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?= $uri->getSegment(2) === 'students' ? 'active' : '' ?>" href="<?= base_url('/teacher/students') ?>">
+              <i class="bi bi-people"></i>
+              <span>My Students</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?= $currentSegment === 'manage_course' ? 'active' : '' ?>" href="<?= base_url('manage_course') ?>">
+              <i class="bi bi-upload"></i>
+              <span>Manage Courses</span>
+            </a>
+          </li>
+          <?php endif; ?>
 
-        <!-- Student specific navigation -->
-        <?php if ($userRole === 'student'): ?>
-        <li class="nav-item">
-          <a class="nav-link <?= $currentSegment === 'courses' ? 'active' : '' ?>" href="<?= base_url('/courses') ?>">
-            <i class="bi bi-book"></i>
-            <span>Courses</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?= ($currentSegment === 'student' && $uri->getSegment(2) === 'profile') ? 'active' : '' ?>" href="<?= base_url('/student/profile') ?>">
-            <i class="bi bi-person"></i>
-            <span>Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?= ($currentSegment === 'student' && $uri->getSegment(2) === 'materials') ? 'active' : '' ?>" href="<?= base_url('/student/materials') ?>">
-            <i class="bi bi-cloud-download"></i>
-            <span>My Materials</span>
-          </a>
-        </li>
-        <?php endif; ?>
+          <!-- Student specific navigation -->
+          <?php if ($userRole === 'student'): ?>
+          <li class="nav-item">
+            <a class="nav-link <?= $currentSegment === 'courses' ? 'active' : '' ?>" href="<?= base_url('/courses') ?>">
+              <i class="bi bi-book"></i>
+              <span>Courses</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?= ($currentSegment === 'student' && $uri->getSegment(2) === 'materials') ? 'active' : '' ?>" href="<?= base_url('/student/materials') ?>">
+              <i class="bi bi-cloud-download"></i>
+              <span>My Materials</span>
+            </a>
+          </li>
+          <?php endif; ?>
+        </ul>
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('/logout') ?>">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Logout</span>
-          </a>
-        </li>
-      </ul>
+        <div class="logout-container">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="<?= base_url('/logout') ?>">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Logout</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
     <!-- Top bar -->
@@ -382,6 +431,19 @@
           </ul>
         </div>
 
+        <!-- Profile Dropdown -->
+        <div class="profile-dropdown dropdown">
+          <button class="dropdown-toggle position-relative" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="Profile">
+            👤
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <li><h6 class="dropdown-header"><?= esc($userName) ?></h6></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="<?= base_url('profile') ?>"><i class="bi bi-person me-2"></i>Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="<?= base_url('/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+          </ul>
+        </div>
 
       </div>
     </header>
