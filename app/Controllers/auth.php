@@ -26,8 +26,7 @@ class Auth extends Controller
                     $data = [
                         'name'     => trim($this->request->getPost('name')),
                         'email'    => $this->request->getPost('email'),
-                        // ✅ Hash password before saving
-                        'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
+                        'password' => $this->request->getPost('password'),
                         'role'     => $this->request->getPost('role')
                     ];
                     
@@ -164,32 +163,22 @@ class Auth extends Controller
                     return redirect()->to('/profile');
                 }
 
-                // Generate new password hash - be explicit and verify format
                 try {
-                    $newPasswordHash = password_hash($newPassword, PASSWORD_BCRYPT);
-                    log_message('debug', 'New password hash generated successfully: ' . $newPasswordHash);
-                    log_message('debug', 'Hash info - Algorithm: ' . password_algos()[$newPasswordHash[0]] ?? 'Unknown', 'Length: ' . strlen($newPasswordHash));
-
                     $updateData = [
-                        'password' => $newPasswordHash,
+                        'password' => $newPassword,
                         'updated_at' => date('Y-m-d H:i:s')
                     ];
-
-                    log_message('debug', 'Attempting database update for user ' . $userId);
 
                     $updateResult = $userModel->update($userId, $updateData);
 
                     if ($updateResult) {
-                        log_message('debug', 'Password update SUCCESSFUL for user ' . $userId);
                         $session->setFlashdata('success', 'Password changed successfully! You should now be able to log in with your new password.');
                         return redirect()->to('/profile');
                     } else {
-                        log_message('debug', 'Password update FAILED for user ' . $userId);
                         $session->setFlashdata('error', 'Database update failed. Please try again.');
                         return redirect()->to('/profile');
                     }
                 } catch (\Exception $e) {
-                    log_message('error', 'Exception during password update: ' . $e->getMessage());
                     $session->setFlashdata('error', 'Error updating password.');
                     return redirect()->to('/profile');
                 }
@@ -246,7 +235,7 @@ class Auth extends Controller
 
                 // Update password
                 $passwordData = [
-                    'password' => password_hash($this->request->getPost('new_password'), PASSWORD_BCRYPT)
+                    'password' => $this->request->getPost('new_password')
                 ];
 
                 if ($userModel->update($userId, $passwordData)) {
@@ -510,7 +499,7 @@ class Auth extends Controller
                     $data = [
                         'name'     => trim($this->request->getPost('name')),
                         'email'    => $this->request->getPost('email'),
-                        'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT),
+                        'password' => $this->request->getPost('password'),
                         'role'     => $this->request->getPost('role'),
                         'status'   => 'active' // New users are active by default
                     ];

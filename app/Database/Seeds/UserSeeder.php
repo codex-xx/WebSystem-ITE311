@@ -8,7 +8,7 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        $defaultPassword = password_hash('123456', PASSWORD_DEFAULT);
+        $defaultPassword = password_hash('123456', PASSWORD_BCRYPT);
 
         $users = [
             [
