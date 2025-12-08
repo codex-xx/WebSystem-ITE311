@@ -64,7 +64,7 @@ Course Material Management - ITE311
                                     <?php foreach (array_slice($materials, 0, 2) as $material): ?>
                                         <li>
                                             <i class="bi bi-file-earmark"></i>
-                                            <?= esc($material['file_name']) ?>
+                                            <?= esc($material['title'] ?? $material['file_name']) ?>
                                         </li>
                                     <?php endforeach; ?>
                                     <?php if ($materialsCount > 2): ?>
@@ -110,6 +110,8 @@ Course Material Management - ITE311
                                     <th><i class="bi bi-envelope"></i> Email</th>
                                     <th><i class="bi bi-file-earmark-text"></i> Assignment File</th>
                                     <th><i class="bi bi-calendar"></i> Submitted On</th>
+                                    <th><i class="bi bi-check2-circle"></i> Grade</th>
+                                    <th><i class="bi bi-chat"></i> Feedback</th>
                                     <th><i class="bi bi-download"></i> Download</th>
                                 </tr>
                             </thead>
@@ -129,12 +131,34 @@ Course Material Management - ITE311
                                         <td>
                                             <?= date('M j, Y, g:i A', strtotime($assignment['submitted_at'])) ?>
                                         </td>
-                                        <td>
-                                            <a href="<?= base_url('/assignments/download/' . $assignment['id']) ?>"
-                                               class="btn btn-sm btn-outline-primary"
-                                               title="Download Assignment">
-                                                <i class="bi bi-download"></i> Download
-                                            </a>
+                                        <td style="min-width: 140px;">
+                                            <input type="text"
+                                                   class="form-control form-control-sm grade-input"
+                                                   value="<?= esc($assignment['grade'] ?? '') ?>"
+                                                   placeholder="e.g. 95 or A"
+                                                   data-assignment-id="<?= $assignment['id'] ?>">
+                                        </td>
+                                        <td style="min-width: 180px;">
+                                            <input type="text"
+                                                   class="form-control form-control-sm feedback-input"
+                                                   value="<?= esc($assignment['feedback'] ?? '') ?>"
+                                                   placeholder="Optional feedback">
+                                            <?php if (!empty($assignment['graded_at'])): ?>
+                                                <div class="small text-muted mt-1">Graded: <?= date('M j, Y g:i A', strtotime($assignment['graded_at'])) ?></div>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td class="text-nowrap">
+                                            <div class="d-flex gap-1">
+                                                <a href="<?= base_url('/assignments/download/' . $assignment['id']) ?>"
+                                                   class="btn btn-sm btn-outline-primary"
+                                                   title="Download Assignment">
+                                                    <i class="bi bi-download"></i>
+                                                </a>
+                                                <button class="btn btn-sm btn-success grade-btn"
+                                                        data-assignment-id="<?= $assignment['id'] ?>">
+                                                    <i class="bi bi-send"></i> Save
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -188,6 +212,7 @@ Course Material Management - ITE311
                                     <i class="bi bi-info-circle"></i> Upload Instructions
                                 </h6>
                                 <ul class="mb-0 small">
+                                    <li>Add a clear title for the material</li>
                                     <li>Select a file from your computer</li>
                                     <li>Ensure it's one of the allowed file types</li>
                                     <li>File size should not exceed 10MB</li>
@@ -195,6 +220,13 @@ Course Material Management - ITE311
                                 </ul>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="material_title" class="form-label">
+                            <i class="bi bi-type"></i> Material Title
+                        </label>
+                        <input type="text" class="form-control" id="material_title" name="material_title" required maxlength="255" placeholder="Enter a title for this material">
                     </div>
 
                     <div id="uploadProgress" class="d-none">
@@ -338,6 +370,47 @@ document.getElementById('material_file').addEventListener('change', function(e) 
             e.target.value = '';
         }
     }
+});
+
+// Grade submission
+document.querySelectorAll('.grade-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const row = this.closest('tr');
+        const assignmentId = this.getAttribute('data-assignment-id');
+        const gradeInput = row.querySelector('.grade-input');
+        const feedbackInput = row.querySelector('.feedback-input');
+
+        const payload = new FormData();
+        payload.append('grade', gradeInput.value.trim());
+        payload.append('feedback', feedbackInput.value.trim());
+
+        this.disabled = true;
+        this.innerHTML = '<i class="bi bi-hourglass-split"></i>';
+
+        fetch('<?= base_url('/assignments/grade/') ?>' + assignmentId, {
+            method: 'POST',
+            body: payload,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                showAlert('<i class="bi bi-check-circle"></i> Grade saved', 'success');
+                setTimeout(() => location.reload(), 800);
+            } else {
+                throw new Error(data.message || 'Failed to save grade');
+            }
+        })
+        .catch(err => {
+            showAlert('<i class="bi bi-exclamation-triangle"></i> ' + err.message, 'danger');
+        })
+        .finally(() => {
+            this.disabled = false;
+            this.innerHTML = '<i class="bi bi-send"></i> Save';
+        });
+    });
 });
 </script>
 

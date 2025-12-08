@@ -215,6 +215,47 @@
       justify-content: center;
     }
 
+    /* Notifications dropdown styling to match profile dropdown */
+    .topbar .notifications .dropdown-menu {
+      min-width: 360px;
+      padding: 0.75rem 0;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    #notifications-list .dropdown-header,
+    #notifications-list .dropdown-divider,
+    #notifications-list .dropdown-item {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    #notifications-list .dropdown-item {
+      white-space: normal;
+    }
+
+    /* Notification dropdown buttons */
+    .topbar .notifications .dropdown-menu .mark-read-btn {
+      color: #000 !important;
+      border-color: #000 !important;
+      background-color: #fff !important;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+    }
+
+    .topbar .notifications .dropdown-menu .mark-read-btn:hover,
+    .topbar .notifications .dropdown-menu .mark-read-btn:focus {
+      color: #fff !important;
+      background-color: #000 !important;
+      border-color: #000 !important;
+    }
+
+    .topbar .notifications .dropdown-menu .mark-read-btn:disabled {
+      color: #6c757d !important;
+      background-color: #f8f9fa !important;
+      border-color: #ced4da !important;
+    }
+
     .topbar .profile-dropdown .dropdown-toggle {
       background: none;
       border: none;
@@ -390,6 +431,12 @@
               <span>My Materials</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link <?= ($currentSegment === 'student' && $uri->getSegment(2) === 'grades') ? 'active' : '' ?>" href="<?= base_url('/student/grades') ?>">
+              <i class="bi bi-journal-check"></i>
+              <span>My Grades</span>
+            </a>
+          </li>
           <?php endif; ?>
         </ul>
 
@@ -466,9 +513,16 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function() {
+      // Format date/time coming from the API
+      function formatDate(dateString) {
+        if (!dateString) return '';
+        const parsed = new Date(dateString.replace(' ', 'T'));
+        return isNaN(parsed) ? dateString : parsed.toLocaleString();
+      }
+
       // Function to load notifications
       function loadNotifications() {
-        $.get('<?= base_url('notifications') ?>')
+        $.getJSON('<?= base_url('notifications') ?>')
           .done(function(data) {
             // Update badge
             if (data.unread_count > 0) {
@@ -484,11 +538,17 @@
             if (data.notifications.length > 0) {
               data.notifications.forEach(function(notification) {
                 var readClass = notification.is_read == 1 ? 'text-muted' : '';
+                var buttonLabel = notification.is_read == 1 ? 'Read' : 'Mark Read';
+                var buttonState = notification.is_read == 1 ? 'disabled' : '';
                 var itemHtml = `
                   <li>
                     <div class="dropdown-item ${readClass}" data-id="${notification.id}">
-                      <small>${notification.message}</small>
-                      ${notification.is_read == 0 ? '<button class="btn btn-sm btn-outline-primary ms-2 mark-read-btn">Mark Read</button>' : ''}
+                      <div class="d-flex justify-content-between align-items-start">
+                        <small>${notification.message}</small>
+                        <button class="btn btn-sm btn-outline-dark ms-2 mark-read-btn" ${buttonState}>${buttonLabel}</button>
+                      </div>
+                      ${notification.created_at ? `<div class="small text-muted mt-1">Received: ${formatDate(notification.created_at)}</div>` : ''}
+                      ${notification.is_read == 1 ? `<div class="small text-success mt-1">Marked read</div>` : ''}
                     </div>
                   </li>
                 `;
@@ -509,11 +569,21 @@
       // Mark as read
       $(document).on('click', '.mark-read-btn', function(e) {
         e.stopPropagation();
-        var notificationId = $(this).parent().data('id');
+        var $button = $(this);
+        var $item = $button.closest('.dropdown-item');
+        var notificationId = $item.data('id');
+        if ($button.is(':disabled')) {
+          return;
+        }
         $.post('<?= base_url('notifications/mark_read/') ?>' + notificationId)
           .done(function(response) {
             if (response.success) {
-              loadNotifications(); // Reload notifications
+              // Show the time it was marked read immediately
+              var readTime = new Date().toLocaleString();
+              $item.addClass('text-muted');
+              $button.text('Read').prop('disabled', true);
+              $item.append(`<div class="small text-success mt-1">Marked read at ${readTime}</div>`);
+              loadNotifications(); // Reload notifications and badge counts
             }
           })
           .fail(function() {

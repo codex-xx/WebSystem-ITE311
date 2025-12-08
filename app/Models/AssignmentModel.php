@@ -9,7 +9,7 @@ class AssignmentModel extends Model
     protected $table = 'assignments';
     protected $primaryKey = 'id';
     protected $useTimestamps = false;
-    protected $allowedFields = ['user_id', 'course_id', 'file_name', 'file_path', 'submitted_at'];
+    protected $allowedFields = ['user_id', 'course_id', 'file_name', 'file_path', 'submitted_at', 'grade', 'feedback', 'graded_at'];
 
     /**
      * Submit an assignment.

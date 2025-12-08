@@ -39,6 +39,7 @@ class Materials extends Controller
         }
 
         if ($this->request->getMethod() === 'POST') {
+            $title = trim($this->request->getPost('material_title'));
             // Get uploaded file
             $file = $this->request->getFile('material_file');
 
@@ -65,13 +66,25 @@ class Materials extends Controller
             $newName = $file->getRandomName();
 
             // Move file to uploads directory
-            if ($file->move(WRITEPATH . 'uploads/', $newName)) {
+            // Ensure upload directory exists
+            $uploadDir = WRITEPATH . 'uploads/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            if ($file->move($uploadDir, $newName)) {
                 // Prepare data for database
                 $data = [
                     'course_id' => $course_id,
                     'file_name' => $file->getClientName(),
-                    'file_path' => WRITEPATH . 'uploads/' . $newName,
+                    'file_path' => $uploadDir . $newName,
                 ];
+
+                // Add title only if column exists (avoids DB errors when migration not run yet)
+                $dbFields = \Config\Database::connect()->getFieldNames('materials');
+                if (in_array('title', $dbFields, true)) {
+                    $data['title'] = $title ?: $file->getClientName();
+                }
 
                 // Save to database
                 $materialModel = new MaterialModel();
@@ -174,18 +187,11 @@ class Materials extends Controller
             $groupedMaterials[$courseId]['materials'][] = $material;
         }
 
-        // Also get courses with no materials but enrolled, so they can still submit
-        $enrollmentModel = new \App\Models\EnrollmentModel();
-        $enrollments = $enrollmentModel->getUserEnrollments($userId);
-        foreach ($enrollments as $enrollment) {
-            $courseId = $enrollment['course_id'];
-            if (!isset($groupedMaterials[$courseId])) {
-                $groupedMaterials[$courseId] = [
-                    'course_name' => $enrollment['course_name'],
-                    'materials' => [],
-                    'has_submitted' => $assignmentModel->hasSubmittedForCourse($userId, $courseId)
-                ];
-            }
+        // Only show courses that have at least one uploaded material
+        // (removes empty courses so students only see/downlaod when files exist)
+        if (empty($groupedMaterials)) {
+            // If no materials at all, leave empty so the view shows the empty state
+            $groupedMaterials = [];
         }
 
         $data = [
@@ -369,5 +375,82 @@ if ($assignmentModel->submitAssignment($data)) {
 
         // Force download
         return $this->response->download($filePath, null, true);
+    }
+
+    /**
+     * Grade a submitted assignment (teachers only).
+     */
+    public function gradeAssignment($assignment_id)
+    {
+        $session = session();
+
+        if (!$session->get('isLoggedIn') || $session->get('role') !== 'teacher') {
+            return $this->response->setJSON(['success' => false, 'message' => 'Access denied'])->setStatusCode(403);
+        }
+
+        $grade = trim($this->request->getPost('grade') ?? '');
+        $feedback = trim($this->request->getPost('feedback') ?? '');
+
+        if ($grade === '') {
+            return $this->response->setJSON(['success' => false, 'message' => 'Grade is required'])->setStatusCode(422);
+        }
+
+        $assignmentModel = new \App\Models\AssignmentModel();
+        $assignment = $assignmentModel->find($assignment_id);
+
+        if (!$assignment) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Assignment not found'])->setStatusCode(404);
+        }
+
+        // Ensure grading columns exist to avoid silent failures
+        $fields = \Config\Database::connect()->getFieldNames('assignments');
+        if (!in_array('grade', $fields, true) || !in_array('feedback', $fields, true) || !in_array('graded_at', $fields, true)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Grading fields missing. Run migrations.'])->setStatusCode(500);
+        }
+
+        $updated = $assignmentModel->update($assignment_id, [
+            'grade' => $grade,
+            'feedback' => $feedback,
+            'graded_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        if (!$updated) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to save grade'])->setStatusCode(500);
+        }
+
+        // Notify student
+        $notificationModel = new \App\Models\NotificationModel();
+        $notificationModel->insert([
+            'user_id' => $assignment['user_id'],
+            'message' => 'Your assignment has been graded. Grade: ' . $grade,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
+        return $this->response->setJSON(['success' => true]);
+    }
+
+    /**
+     * Student view: see grades for submitted assignments.
+     */
+    public function grades()
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+
+        if (!$session->get('isLoggedIn') || $session->get('role') !== 'student') {
+            $session->setFlashdata('error', 'Access denied. Only students can view grades.');
+            return redirect()->to('/dashboard');
+        }
+
+        $assignmentModel = new \App\Models\AssignmentModel();
+        $assignments = $assignmentModel->getAssignmentsByStudent($userId);
+
+        $data = [
+            'assignments' => $assignments,
+            'user_name' => $session->get('user_name'),
+            'role' => $session->get('role'),
+        ];
+
+        return view('materials/grades', $data);
     }
 }

@@ -9,7 +9,7 @@ class MaterialModel extends Model
     protected $table = 'materials';
     protected $primaryKey = 'id';
     protected $useTimestamps = false;
-    protected $allowedFields = ['course_id', 'file_name', 'file_path', 'created_at'];
+    protected $allowedFields = ['course_id', 'title', 'file_name', 'file_path', 'created_at'];
 
     /**
      * Insert a new material record.

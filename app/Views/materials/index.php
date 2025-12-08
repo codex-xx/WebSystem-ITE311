@@ -36,7 +36,7 @@
                                             <div class="flex-grow-1">
                                                 <h6 class="mb-1">
                                                     <i class="bi bi-file-earmark-text-fill text-primary"></i>
-                                                    <?= esc($material['file_name']) ?>
+                                                    <?= esc($material['title'] ?? $material['file_name']) ?>
                                                 </h6>
                                                 <small class="text-muted">
                                                     Uploaded on: <?= date('M j, Y', strtotime($material['created_at'])) ?>

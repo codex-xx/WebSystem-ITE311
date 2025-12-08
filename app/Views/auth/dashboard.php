@@ -135,6 +135,60 @@
                     </div>
                 </div>
 
+                <!-- Academic Info -->
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Academic Information</h5>
+
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-sm mb-0">
+                                        <thead class="table-light">
+                                            <tr><th>Academic Year</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>2024 - 2025</td></tr>
+                                            <tr><td>2023 - 2024</td></tr>
+                                            <tr><td>2022 - 2023</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-sm mb-0">
+                                        <thead class="table-light">
+                                            <tr><th>Semester</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>1st Semester</td></tr>
+                                            <tr><td>2nd Semester</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-sm mb-0">
+                                        <thead class="table-light">
+                                            <tr><th>Year Level / Terms</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Year 1 - Term 1</td></tr>
+                                            <tr><td>Year 1 - Term 2</td></tr>
+                                            <tr><td>Year 1 - Term 3</td></tr>
+                                            <tr><td>Summer Term</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Enrolled Courses Section -->
                 <div class="card shadow-sm mb-3">
                     <div class="card-body">
