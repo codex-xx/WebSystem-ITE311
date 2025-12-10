@@ -51,3 +51,11 @@ $routes->get('manage_course', 'Course::manage');
 $routes->get('course/manage/(:num)', 'Course::viewMaterials/$1');
 $routes->get('course/search', 'Course::search');
 $routes->post('course/search', 'Course::search');
+
+// Enrollment routes
+$routes->get('enrollment/student', 'Enrollment::studentIndex');
+$routes->get('enrollment/teacher', 'Enrollment::teacherIndex');
+$routes->post('enrollment/approve', 'Enrollment::approve');
+$routes->post('enrollment/deny', 'Enrollment::deny');
+$routes->get('enrollment/force', 'Enrollment::forceEnrollForm');
+$routes->post('enrollment/force', 'Enrollment::forceEnroll');

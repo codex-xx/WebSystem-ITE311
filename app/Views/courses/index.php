@@ -35,7 +35,7 @@
             <p><?= esc($c['description']) ?></p>
           </div>
           <?php if ($showEnrollButton): ?>
-            <button class="btn btn-success enroll-btn" data-course-id="<?= esc($c['id']) ?>">Enroll</button>
+            <button class="btn btn-success enroll-btn" data-course-id="<?= esc($c['id']) ?>">Request Enrollment</button>
           <?php elseif ($isEnrolled): ?>
             <button class="btn btn-secondary enroll-btn" data-course-id="<?= esc($c['id']) ?>" disabled>Enrolled</button>
           <?php endif; ?>
@@ -58,7 +58,7 @@ $(document).ready(function(){
   function performServerSearch(term) {
     $('#searchStatus').text('Searching...');
     $.ajax({
-      url: '<?= site_url("course/search") ?>',
+      url: '<?= base_url("index.php/course/search") ?>',
       method: 'POST',
       data: { term: term },
       dataType: 'json'
@@ -72,7 +72,7 @@ $(document).ready(function(){
           const showEnrollButton = (!isEnrolled && data.user_role === 'student');
           let buttonHtml = '';
           if (showEnrollButton) {
-            buttonHtml = '<button class="btn btn-success enroll-btn" data-course-id="'+c.id+'">Enroll</button>';
+            buttonHtml = '<button class="btn btn-success enroll-btn" data-course-id="'+c.id+'">Request Enrollment</button>';
           } else if (isEnrolled) {
             buttonHtml = '<button class="btn btn-secondary enroll-btn" data-course-id="'+c.id+'" disabled>Enrolled</button>';
           }
@@ -154,7 +154,7 @@ $(document).ready(function(){
     button.prop('disabled', true).text('Enrolling...');
 
     $.ajax({
-      url: '<?= site_url("course/enroll") ?>',
+      url: '<?= base_url("index.php/course/enroll") ?>',
       method: 'POST',
       data: { course_id: courseId },
       dataType: 'json'
@@ -167,8 +167,8 @@ $(document).ready(function(){
         button.prop('disabled', false).text('Enroll');
       }
     }).fail(function(xhr, status, err){
-      alert('Enrollment failed: ' + status);
-      button.prop('disabled', false).text('Enroll');
+      alert('Request failed: ' + status);
+      button.prop('disabled', false).text('Request Enrollment');
     });
   });
 });

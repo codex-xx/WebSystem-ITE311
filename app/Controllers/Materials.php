@@ -204,6 +204,58 @@ class Materials extends Controller
     }
 
     /**
+     * Display materials for a specific course (students only).
+     * Checks if student is enrolled in the course.
+     *
+     * @param int $courseId
+     */
+    public function courseMaterials($courseId)
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+        $userRole = $session->get('role');
+
+        // Check if user is logged in and is a student
+        if (!$session->get('isLoggedIn') || $userRole !== 'student') {
+            $session->setFlashdata('error', 'Access denied. Only students can view this page.');
+            return redirect()->to('/dashboard');
+        }
+
+        // Check if student is enrolled in the course
+        $enrollmentModel = new \App\Models\EnrollmentModel();
+        if (!$enrollmentModel->isAlreadyEnrolled($userId, $courseId)) {
+            $session->setFlashdata('error', 'Access denied. You are not enrolled in this course.');
+            return redirect()->to('/student/materials');
+        }
+
+        // Get course info
+        $db = \Config\Database::connect();
+        $course = $db->table('courses')->where('id', $courseId)->get()->getRow();
+        if (!$course) {
+            $session->setFlashdata('error', 'Course not found.');
+            return redirect()->to('/student/materials');
+        }
+
+        // Get materials for this course
+        $materialModel = new MaterialModel();
+        $materials = $materialModel->getMaterialsByCourse($courseId);
+
+        // Check if student has submitted assignment
+        $assignmentModel = new \App\Models\AssignmentModel();
+        $hasSubmitted = $assignmentModel->hasSubmittedForCourse($userId, $courseId);
+
+        $data = [
+            'course' => $course,
+            'materials' => $materials,
+            'has_submitted' => $hasSubmitted,
+            'user_name' => $session->get('user_name'),
+            'role' => $userRole,
+        ];
+
+        return view('materials/course', $data);
+    }
+
+    /**
      * Submit assignment for a course.
      */
     public function submit($courseId)

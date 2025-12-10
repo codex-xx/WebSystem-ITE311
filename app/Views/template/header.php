@@ -382,6 +382,12 @@
           <!-- Admin specific navigation -->
           <?php if ($userRole === 'admin'): ?>
           <li class="nav-item">
+            <a class="nav-link <?= ($currentSegment === 'enrollment' && $uri->getSegment(2) === 'teacher') ? 'active' : '' ?>" href="<?= base_url('index.php/enrollment/teacher') ?>">
+              <i class="bi bi-clipboard-check"></i>
+              <span>Enrollments</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link <?= $currentSegment === 'manage_course' ? 'active' : '' ?>" href="<?= base_url('manage_course') ?>">
               <i class="bi bi-gear"></i>
               <span>Manage Courses</span>
@@ -404,6 +410,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link <?= ($currentSegment === 'enrollment' && $uri->getSegment(2) === 'teacher') ? 'active' : '' ?>" href="<?= base_url('index.php/enrollment/teacher') ?>">
+              <i class="bi bi-clipboard-check"></i>
+              <span>Enrollment Requests</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link <?= $uri->getSegment(2) === 'students' ? 'active' : '' ?>" href="<?= base_url('/teacher/students') ?>">
               <i class="bi bi-people"></i>
               <span>My Students</span>
@@ -423,6 +435,12 @@
             <a class="nav-link <?= $currentSegment === 'courses' ? 'active' : '' ?>" href="<?= base_url('/courses') ?>">
               <i class="bi bi-book"></i>
               <span>Courses</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?= ($currentSegment === 'enrollment' && $uri->getSegment(2) === 'student') ? 'active' : '' ?>" href="<?= base_url('/enrollment/student') ?>">
+              <i class="bi bi-journal-check"></i>
+              <span>My Enrollments</span>
             </a>
           </li>
           <li class="nav-item">

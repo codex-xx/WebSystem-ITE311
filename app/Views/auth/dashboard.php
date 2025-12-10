@@ -8,10 +8,73 @@
             <!-- Admin Dashboard -->
             <?php if ($role === 'admin'): ?>
                 <div class="mb-4">
-                    <h2 class="text-primary mb-4"><i class="bi bi-people-fill"></i> User Management</h2>
+                    <h2 class="text-primary mb-4"><i class="bi bi-people-fill"></i> Admin Dashboard</h2>
                 </div>
 
+                <!-- Enrollment Management Section -->
                 <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm mb-3">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0"><i class="bi bi-journal-check"></i> Enrollment Management</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <?php
+                                    $db = \Config\Database::connect();
+                                    $enrollmentModel = new \App\Models\EnrollmentModel();
+
+                                    // Get enrollment stats
+                                    $pendingCount = $db->table('enrollments')->where('status', 'pending')->countAllResults();
+                                    $approvedCount = $db->table('enrollments')->where('status', 'approved')->countAllResults();
+                                    $totalEnrollments = $db->table('enrollments')->countAllResults();
+                                    $courseCount = $db->table('courses')->countAllResults();
+                                    ?>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h3 class="text-warning"><?= $pendingCount ?></h3>
+                                            <p class="mb-1">Pending Requests</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h3 class="text-success"><?= $approvedCount ?></h3>
+                                            <p class="mb-1">Approved Enrollments</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h3 class="text-primary"><?= $totalEnrollments ?></h3>
+                                            <p class="mb-1">Total Enrollments</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h3 class="text-info"><?= $courseCount ?></h3>
+                                            <p class="mb-1">Available Courses</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center">
+                                        <a href="<?= base_url('index.php/enrollment/teacher') ?>" class="btn btn-primary me-2">
+                                            <i class="bi bi-gear"></i> Manage Enrollments
+                                        </a>
+                                        <a href="<?= base_url('index.php/enrollment/force') ?>" class="btn btn-success">
+                                            <i class="bi bi-person-plus"></i> Force Enroll Student
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management Section -->
+                <div class="row mb-4">
+                    <div class="col-md-12 mb-4">
+                        <h2 class="text-primary"><i class="bi bi-people-fill"></i> User Management</h2>
+                    </div>
                     <div class="col-md-3">
                         <div class="card text-white bg-primary mb-3 shadow-sm">
                             <div class="card-body">
@@ -78,6 +141,48 @@
 
             <!-- Teacher Dashboard -->
             <?php if ($role === 'teacher'): ?>
+                <!-- Enrollment Management Section for Teachers -->
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="bi bi-clipboard-check"></i> Enrollment Management</h5>
+                    </div>
+                    <div class="card-body">
+                        <?php
+                        $enrollmentModel = new \App\Models\EnrollmentModel();
+                        $teacher_id = session()->get('user_id');
+                        $pendingRequests = $enrollmentModel->getPendingRequests($teacher_id);
+                        $totalEnrollments = count($enrollmentModel->getEnrollmentsForTeacher($teacher_id));
+                        ?>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="text-center">
+                                    <h3 class="text-warning"><?= count($pendingRequests) ?></h3>
+                                    <p class="mb-1">Pending Requests</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-center">
+                                    <h3 class="text-primary"><?= $totalEnrollments ?></h3>
+                                    <p class="mb-1">Total Enrollments</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <a href="<?= base_url('index.php/enrollment/teacher') ?>" class="btn btn-success me-2">
+                                <i class="bi bi-gear"></i> Manage Requests
+                            </a>
+                            <a href="<?= base_url('index.php/enrollment/force') ?>" class="btn btn-outline-primary">
+                                <i class="bi bi-person-plus"></i> Force Enroll
+                            </a>
+                        </div>
+                        <?php if (!empty($pendingRequests)): ?>
+                            <div class="alert alert-info mt-3">
+                                <i class="bi bi-info-circle"></i> You have pending enrollment requests that need your approval.
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
                 <div class="card shadow-sm mb-3">
                     <div class="card-body">
                         <h5 class="card-title">My Students</h5>
@@ -135,85 +240,277 @@
                     </div>
                 </div>
 
-                <!-- Academic Info -->
+                <!-- Class Schedule -->
                 <div class="card shadow-sm mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">Academic Information</h5>
+                        <?php
+                            // Filter approved/force_enrolled courses
+                            $activeCourses = array_filter($enrolledCourses ?? [], function($enrollment) {
+                                return in_array($enrollment['status'], ['approved', 'force_enrolled']);
+                            });
 
-                        <div class="row g-3">
+                            // Collect unique academic periods
+                            $academicPeriods = [];
+                            foreach ($activeCourses as $course) {
+                                $key = ($course['school_year'] ?? '') . '|' . ($course['semester'] ?? '');
+                                if (!isset($academicPeriods[$key]) && ($course['school_year'] ?? '') && ($course['semester'] ?? '')) {
+                                    $academicPeriods[$key] = [
+                                        'school_year' => $course['school_year'],
+                                        'semester' => $course['semester']
+                                    ];
+                                }
+                            }
+
+                            // Sort periods by school year desc, semester
+                            usort($academicPeriods, function($a, $b) {
+                                if ($a['school_year'] !== $b['school_year']) {
+                                    return strcmp($b['school_year'], $a['school_year']);
+                                }
+                                $semOrder = ['Summer' => 1, '2nd' => 2, '1st' => 3]; // Latest semester first
+                                return ($semOrder[$b['semester']] ?? 0) <=> ($semOrder[$a['semester']] ?? 0);
+                            });
+
+                        ?>
+                        <h5 class="card-title"><i class="bi bi-calendar-event"></i> Class Schedule</h5>
+
+                        <?php
+                            if (!empty($activeCourses)):
+                                // Group courses by academic period
+                                $coursesByPeriod = [];
+                                foreach ($activeCourses as $course) {
+                                    // Skip courses without schedule data
+                                    if (empty($course['schedule_days']) || empty($course['schedule_time_start']) || empty($course['schedule_time_end'])) {
+                                        continue;
+                                    }
+                                    $periodKey = $course['school_year'] . '|' . $course['semester'];
+                                    if (!isset($coursesByPeriod[$periodKey])) {
+                                        $coursesByPeriod[$periodKey] = [];
+                                    }
+                                    $coursesByPeriod[$periodKey][] = $course;
+                                }
+
+                                // Sort periods by school year desc, semester
+                                ksort($coursesByPeriod);
+                                $coursesByPeriod = array_reverse($coursesByPeriod);
+
+                                $weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+                                foreach ($coursesByPeriod as $periodKey => $periodCourses):
+                                    // Get period info from last course
+                                    $periodInfo = explode('|', $periodKey);
+                                    $schoolYear = $periodInfo[0];
+                                    $semester = $periodInfo[1];
+                        ?>
+                                    <h6 class="mt-4 mb-3 fw-bold text-primary">
+                                        <i class="bi bi-journal"></i> <?= esc($schoolYear) ?> - <?= esc($semester) ?> Semester
+                                    </h6>
+
+                                    <?php
+                                        $scheduleData = [];
+                                        foreach ($periodCourses as $course) {
+                                            $days = array_map('trim', explode(',', strtolower($course['schedule_days'])));
+                                            if ($days && !empty(array_filter($days))) {
+                                                $start = date('g:i A', strtotime($course['schedule_time_start']));
+                                                $end = date('g:i A', strtotime($course['schedule_time_end']));
+                                                $timeSlot = "{$start} - {$end}";
+                                                foreach ($days as $day) {
+                                                    if (!empty($day)) {
+                                                        $scheduleData[$day][] = [
+                                                            'time' => $timeSlot,
+                                                            'code' => $course['course_code'],
+                                                            'title' => $course['course_name']
+                                                        ];
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        // Collect all unique time slots for this period
+                                        $allTimes = [];
+                                        foreach ($scheduleData as $dayClasses) {
+                                            foreach ($dayClasses as $class) {
+                                                $allTimes[] = $class['time'];
+                                            }
+                                        }
+                                        $allTimes = array_unique($allTimes);
+                                        sort($allTimes);
+                                    ?>
+
+                                    <?php if (!empty($allTimes)): ?>
+                                        <div class="table-responsive mb-4">
+                                            <table class="table table-bordered">
+                                                <thead class="table-secondary">
+                                                    <tr>
+                                                        <th style="width: 120px;">Time</th>
+                                                        <th>Course</th>
+                                                        <?php foreach ($weekdays as $day): ?>
+                                                            <th><?php echo ucfirst($day); ?></th>
+                                                        <?php endforeach; ?>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                        foreach ($allTimes as $time):
+                                                            echo '<tr>';
+                                                            echo '<td>' . esc($time) . '</td>';
+                                                            echo '<td>';
+                                                            // Show courses for this time slot
+                                                            $timeCourses = [];
+                                                            foreach ($weekdays as $day) {
+                                                                if (isset($scheduleData[$day])) {
+                                                                    $dayCourses = array_filter($scheduleData[$day], fn($c) => $c['time'] === $time);
+                                                                    if (!empty($dayCourses)) {
+                                                                        $timeCourses = array_merge($timeCourses, $dayCourses);
+                                                                    }
+                                                                }
+                                                            }
+                                                            if (!empty($timeCourses)) {
+                                                                foreach ($timeCourses as $course) {
+                                                                    echo '<div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded bg-light">';
+                                                                    echo '<div>';
+                                                                    echo '<strong>' . esc($course['code']) . '</strong> - ' . esc($course['title']);
+                                                                    echo '</div>';
+                                                                    echo '<small class="text-muted">' . esc($course['days'] ?? 'TBA') . '</small>';
+                                                                    echo '</div>';
+                                                                }
+                                                            }
+                                                            echo '</td>';
+                                                            foreach ($weekdays as $day):
+                                                                echo '<td>';
+                                                                if (isset($scheduleData[$day])) {
+                                                                    $dayCourses = array_filter($scheduleData[$day], fn($c) => $c['time'] === $time);
+                                                                    if (!empty($dayCourses)) {
+                                                                        echo '<div class="text-center">';
+                                                                        foreach ($dayCourses as $course) {
+                                                                            echo '<span class="badge bg-primary mb-1">' . esc($course['code']) . '</span><br>';
+                                                                        }
+                                                                        echo '</div>';
+                                                                    }
+                                                                }
+                                                                echo '</td>';
+                                                            endforeach;
+                                                            echo '</tr>';
+                                                        endforeach;
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <?php endif; ?>
+
+                                <?php endforeach; ?>
+                        <?php else: ?>
+                                <div class="text-center py-4">
+                                    <i class="bi bi-calendar-x text-muted" style="font-size: 3rem;"></i>
+                                    <p class="text-muted mt-2">No active enrollments found.</p>
+                                </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <!-- Enrollment Status Section -->
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="bi bi-journal-check"></i> My Enrollments</h5>
+                    </div>
+                    <div class="card-body">
+                        <?php
+                        $enrollmentModel = new \App\Models\EnrollmentModel();
+                        $user_id = session()->get('user_id');
+                        $allEnrollments = $enrollmentModel->getUserEnrollments($user_id);
+                        $pendingCount = 0;
+                        $approvedCount = 0;
+                        $deniedCount = 0;
+                        foreach ($allEnrollments as $enrollment) {
+                            switch ($enrollment['status']) {
+                                case 'pending': $pendingCount++; break;
+                                case 'approved': case 'force_enrolled': $approvedCount++; break;
+                                case 'denied': $deniedCount++; break;
+                            }
+                        }
+                        ?>
+                        <div class="row mb-3">
                             <div class="col-md-4">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-sm mb-0">
-                                        <thead class="table-light">
-                                            <tr><th>Academic Year</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>2024 - 2025</td></tr>
-                                            <tr><td>2023 - 2024</td></tr>
-                                            <tr><td>2022 - 2023</td></tr>
-                                        </tbody>
-                                    </table>
+                                <div class="text-center">
+                                    <h4 class="text-success"><?= $approvedCount ?></h4>
+                                    <p class="mb-1">Active Enrollments</p>
                                 </div>
                             </div>
-
                             <div class="col-md-4">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-sm mb-0">
-                                        <thead class="table-light">
-                                            <tr><th>Semester</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>1st Semester</td></tr>
-                                            <tr><td>2nd Semester</td></tr>
-                                        </tbody>
-                                    </table>
+                                <div class="text-center">
+                                    <h4 class="text-warning"><?= $pendingCount ?></h4>
+                                    <p class="mb-1">Pending Approval</p>
                                 </div>
                             </div>
-
                             <div class="col-md-4">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-sm mb-0">
-                                        <thead class="table-light">
-                                            <tr><th>Year Level / Terms</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>Year 1 - Term 1</td></tr>
-                                            <tr><td>Year 1 - Term 2</td></tr>
-                                            <tr><td>Year 1 - Term 3</td></tr>
-                                            <tr><td>Summer Term</td></tr>
-                                        </tbody>
-                                    </table>
+                                <div class="text-center">
+                                    <h4 class="text-danger"><?= $deniedCount ?></h4>
+                                    <p class="mb-1">Rejected</p>
                                 </div>
                             </div>
                         </div>
+                        <div class="text-center">
+                            <a href="<?= base_url('index.php/enrollment/student') ?>" class="btn btn-primary me-2">
+                                <i class="bi bi-list-check"></i> View All Enrollments
+                            </a>
+                            <a href="<?= base_url('/courses') ?>" class="btn btn-outline-success">
+                                <i class="bi bi-plus-circle"></i> Browse Courses
+                            </a>
+                        </div>
+                        <?php if ($pendingCount > 0): ?>
+                            <div class="alert alert-info mt-3">
+                                <i class="bi bi-info-circle"></i> You have pending enrollment requests waiting for teacher approval.
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 
                 <!-- Enrolled Courses Section -->
                 <div class="card shadow-sm mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">Enrolled Courses</h5>
+                        <h5 class="card-title">Current Enrolled Courses</h5>
                         <div id="enrolled-courses-container">
                             <?php if (empty($enrolledCourses ?? [])): ?>
-                                <p class="text-muted" id="enrolled-empty-msg">No courses enrolled yet.</p>
+                                <div class="text-center py-4">
+                                    <i class="bi bi-book text-muted" style="font-size: 3rem;"></i>
+                                    <p class="text-muted mt-2">No courses enrolled yet.</p>
+                                    <a href="<?= base_url('courses') ?>" class="btn btn-primary">
+                                        <i class="bi bi-search"></i> Browse Available Courses
+                                    </a>
+                                </div>
                             <?php else: ?>
                                 <div class="row" id="enrolled-row">
                                     <?php foreach ($enrolledCourses as $course): ?>
-                                <div class="col-md-4 mb-3">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <h6 class="card-title"><?= esc($course['course_name'] ?? $course['title'] ?? 'Unknown Course') ?></h6>
-                                            <p class="card-text"><?= esc($course['description'] ?? 'No description available.') ?></p>
-                                            <p class="text-muted small">Enrolled on: <?= date('M j, Y', strtotime($course['enrolled_at'])) ?></p>
+                                        <?php if (in_array($course['status'], ['approved', 'force_enrolled'])): ?>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="card h-100 border-success">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                                        <h6 class="card-title mb-1"><?= esc($course['course_name'] ?? $course['title'] ?? 'Unknown Course') ?></h6>
+                                                        <span class="badge bg-success">Active</span>
+                                                    </div>
+                                                    <p class="card-text small text-muted mb-2">
+                                                        <?= esc($course['description'] ?? 'No description available.') ?>
+                                                    </p>
+                                                    <div class="row text-center">
+                                                        <div class="col-12 text-end">
+                                                            <small class="text-muted me-2">Enrolled: <?= date('M j, Y', strtotime($course['enrolled_at'])) ?></small>
+                                                            <a href="<?= base_url('index.php/student/materials') ?>" class="btn btn-sm btn-outline-primary">
+                                                                <i class="bi bi-book"></i> View Materials
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </div>
                             <?php endif; ?>
                         </div>
                     </div>
                 </div>
+
+                <!-- Removed Available Courses Section -->
 
             <?php endif; ?>
 

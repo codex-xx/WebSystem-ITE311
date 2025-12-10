@@ -38,7 +38,7 @@ class Course extends Controller
     }
 
     /**
-     * Handle AJAX enrollment request.
+     * Handle AJAX enrollment request (pending approval).
      * Expects POST with 'course_id'.
      * Returns JSON response.
      */
@@ -53,6 +53,15 @@ class Course extends Controller
             ])->setStatusCode(401);
         }
 
+        // Check if user is a student
+        $user_role = session()->get('role');
+        if ($user_role !== 'student') {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Only students can request enrollment.'
+            ])->setStatusCode(403);
+        }
+
         // Get course_id from POST
         $course_id = $this->request->getPost('course_id');
         if (!$course_id || !is_numeric($course_id)) {
@@ -62,46 +71,23 @@ class Course extends Controller
             ])->setStatusCode(400);
         }
 
-        // Check if course exists
-        $db = \Config\Database::connect();
-        $course = $db->table('courses')->where('id', $course_id)->get()->getRow();
-        if (!$course) {
-            return $this->response->setJSON([
-                'success' => false,
-                'message' => 'Course not found.'
-            ])->setStatusCode(404);
-        }
-
         // Instantiate model
         $enrollmentModel = new EnrollmentModel();
 
-        // Check if already enrolled
-        if ($enrollmentModel->isAlreadyEnrolled($user_id, $course_id)) {
-            return $this->response->setJSON([
-                'success' => false,
-                'message' => 'You are already enrolled in this course.'
-            ]);
-        }
-
-        // Enroll the user
-        $data = [
-            'user_id' => $user_id,
-            'course_id' => $course_id,
-            // enrollment_date will be set automatically in the model
-        ];
-        $enrollment_id = $enrollmentModel->enrollUser ($data);
+        // Request enrollment (pending approval)
+        $enrollment_id = $enrollmentModel->requestEnrollment($user_id, $course_id);
 
         if ($enrollment_id) {
             return $this->response->setJSON([
                 'success' => true,
-                'message' => 'Successfully enrolled in the course.',
+                'message' => 'Enrollment request submitted. Waiting for teacher approval.',
                 'enrollment_id' => $enrollment_id
             ]);
         } else {
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Failed to enroll. Please try again.'
-            ])->setStatusCode(500);
+                'message' => 'Failed to submit enrollment request. Check for conflicts or existing enrollment.'
+            ])->setStatusCode(400);
         }
     }
 
@@ -153,7 +139,7 @@ class Course extends Controller
 
     /**
      * Display course management page for admin and teachers.
-     * Shows all courses where you can upload materials.
+     * Shows all courses where you can upload materials or update schedules.
      */
     public function manage()
     {
@@ -165,9 +151,13 @@ class Course extends Controller
             return redirect()->to('/dashboard');
         }
 
-        // Get all courses
+        // Get courses assigned to the teacher or all for admin
         $db = \Config\Database::connect();
-        $courses = $db->table('courses')->get()->getResultArray();
+        if ($session->get('role') === 'teacher') {
+            $courses = $db->table('courses')->where('teacher_id', $session->get('user_id'))->get()->getResultArray();
+        } else {
+            $courses = $db->table('courses')->get()->getResultArray();
+        }
 
         $data = [
             'courses' => $courses,
@@ -175,7 +165,7 @@ class Course extends Controller
             'role' => $session->get('role')
         ];
 
-        return view('materials/upload', $data);
+        return view('courses/manage', $data);
     }
 
     /**
@@ -224,5 +214,80 @@ class Course extends Controller
         ];
 
         return view('materials/upload', $data);
+    }
+
+    /**
+     * Update course schedule via AJAX.
+     * Expects POST with course_id, school_year, semester, schedule_days, schedule_time_start, schedule_time_end.
+     */
+    public function updateSchedule()
+    {
+        $session = session();
+
+        // Check if user is logged in and has permission
+        if (!$session->get('isLoggedIn') || !in_array($session->get('role'), ['admin', 'teacher'])) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Access denied.'
+            ])->setStatusCode(403);
+        }
+
+        // Get form data
+        $courseId = $this->request->getPost('course_id');
+        $schoolYear = $this->request->getPost('school_year');
+        $semester = $this->request->getPost('semester');
+        $scheduleDays = $this->request->getPost('schedule_days');
+        $scheduleTimeStart = $this->request->getPost('schedule_time_start');
+        $scheduleTimeEnd = $this->request->getPost('schedule_time_end');
+
+        if (!$courseId || !$schoolYear || !$semester) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Missing required fields.'
+            ])->setStatusCode(400);
+        }
+
+        // Load CourseModel
+        $courseModel = new \App\Models\CourseModel();
+        $course = $courseModel->find($courseId);
+
+        if (!$course) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Course not found.'
+            ])->setStatusCode(404);
+        }
+
+        // Check if teacher has permission (only their courses or admin)
+        $userRole = $session->get('role');
+        $userId = $session->get('user_id');
+        if ($userRole === 'teacher' && $course['teacher_id'] != $userId) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'You can only edit your own courses.'
+            ])->setStatusCode(403);
+        }
+
+        // Prepare data for update
+        $updateData = [
+            'school_year' => $schoolYear,
+            'semester' => $semester,
+            'schedule_days' => $scheduleDays,
+            'schedule_time_start' => $scheduleTimeStart,
+            'schedule_time_end' => $scheduleTimeEnd,
+        ];
+
+        // Update the course
+        if ($courseModel->update($courseId, $updateData)) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Course schedule updated successfully.'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => implode(', ', $courseModel->errors())
+            ])->setStatusCode(400);
+        }
     }
 }
