@@ -9,7 +9,7 @@ class CourseModel extends Model
     protected $table = 'courses';
     protected $primaryKey = 'id';
     protected $useTimestamps = false;
-    protected $allowedFields = ['course_code', 'title', 'description', 'teacher_id', 'school_year', 'semester', 'schedule_days', 'schedule_time_start', 'schedule_time_end'];
+    protected $allowedFields = ['course_code', 'title', 'description', 'teacher_id', 'school_year', 'semester', 'schedule_days', 'schedule_time_start', 'schedule_time_end', 'status', 'start_date', 'end_date'];
 
     protected $validationRules = [
         'course_code' => 'required|min_length[1]|max_length[50]',
@@ -21,6 +21,9 @@ class CourseModel extends Model
         'schedule_days' => 'permit_empty|max_length[100]',
         'schedule_time_start' => 'permit_empty|valid_time',
         'schedule_time_end' => 'permit_empty|valid_time',
+        'status' => 'required|in_list[Active,Inactive]',
+        'start_date' => 'permit_empty|valid_date',
+        'end_date' => 'permit_empty|valid_date',
     ];
 
     protected $validationMessages = [
@@ -38,6 +41,26 @@ class CourseModel extends Model
             'in_list' => 'Semester must be 1st, 2nd, or Summer.',
         ],
     ];
+
+    /**
+     * Override validate to add custom date validation.
+     */
+    public function validate($row = null): bool
+    {
+        $result = parent::validate($row);
+
+        if ($result && isset($row['start_date']) && isset($row['end_date']) && !empty($row['start_date']) && !empty($row['end_date'])) {
+            $startDate = strtotime($row['start_date']);
+            $endDate = strtotime($row['end_date']);
+
+            if ($startDate >= $endDate) {
+                $this->errors['end_date'] = 'End date must be after start date.';
+                return false;
+            }
+        }
+
+        return $result;
+    }
 
     /**
      * Override insert to add validation for uniqueness and teacher conflicts.

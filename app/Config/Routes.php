@@ -34,8 +34,8 @@ $routes->post('/course/enroll', 'Course::enroll');
 $routes->get('/student/materials', 'Materials::index');
 $routes->get('/student/grades', 'Materials::grades');
 $routes->match(['get', 'post'], '/student/materials/submit/(:num)', 'Materials::submit/$1');
-$routes->get('/admin/course/(:num)/upload', 'Materials::upload/$1');
-$routes->post('/admin/course/(:num)/upload', 'Materials::upload/$1');
+$routes->get('/materials/manage', 'Materials::manage');
+$routes->match(['get', 'post'], '/course/(:num)/upload', 'Materials::upload/$1');
 $routes->get('/materials/delete/(:num)', 'Materials::delete/$1');
 $routes->get('/materials/download/(:num)', 'Materials::download/$1');
 $routes->post('/assignments/grade/(:num)', 'Materials::gradeAssignment/$1');
@@ -48,7 +48,7 @@ $routes->get('/notifications', 'Notifications::get');
 $routes->post('/notifications/mark_read/(:num)', 'Notifications::mark_as_read/$1');
 $routes->get('courses', 'Course::index');
 $routes->get('manage_course', 'Course::manage');
-$routes->get('course/manage/(:num)', 'Course::viewMaterials/$1');
+$routes->get('course/manage', 'Materials::courseSelection');
 $routes->get('course/search', 'Course::search');
 $routes->post('course/search', 'Course::search');
 
@@ -62,4 +62,5 @@ $routes->post('enrollment/force', 'Enrollment::forceEnroll');
 
 // Course routes
 $routes->post('course/updateSchedule', 'Course::updateSchedule');
-$routes->get('course/viewMaterials/(:num)', 'Course::viewMaterials/$1');
+$routes->post('course/updateCourse', 'Course::updateCourse');
+$routes->get('course/materials/(:num)', 'Materials::courseMaterials/$1');

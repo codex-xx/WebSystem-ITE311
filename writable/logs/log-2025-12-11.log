@@ -7426,3 +7426,1000 @@ WARNING - 2025-12-11 14:19:02 --> [DEPRECATED] Passing lowercase HTTP method "po
  8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
 DEBUG - 2025-12-11 14:19:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-12-11 15:35:43 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 70.
+ 1 APPPATH\Views\materials\view_materials.php(70): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 70)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(250): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:36:54 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 72.
+ 1 APPPATH\Views\materials\view_materials.php(72): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 72)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(250): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:36:56 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 72.
+ 1 APPPATH\Views\materials\view_materials.php(72): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 72)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(250): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:36:56 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 72.
+ 1 APPPATH\Views\materials\view_materials.php(72): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 72)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(250): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:36:56 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 72.
+ 1 APPPATH\Views\materials\view_materials.php(72): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 72)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(250): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-11 15:37:44 --> Error in viewMaterialsOnly: Undefined array key "uploaded_at"
+ERROR - 2025-12-11 15:37:47 --> Error in viewMaterialsOnly: Undefined array key "uploaded_at"
+ERROR - 2025-12-11 15:37:53 --> Error in viewMaterialsOnly: Undefined array key "uploaded_at"
+CRITICAL - 2025-12-11 15:38:36 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 74.
+ 1 APPPATH\Views\materials\view_materials.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 74)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(266): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly(1)
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:39:14 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 74.
+ 1 APPPATH\Views\materials\view_materials.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 74)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(266): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly(1)
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-11 15:41:01 --> mysqli_sql_exception: Unknown column 'courses.title' in 'field list' in C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignm...', 0)
+#1 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignm...')
+#2 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignm...')
+#3 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignm...', Array, false)
+#4 C:\xampp\htdocs\ITE311-ALBARINA\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ITE311-ALBARINA\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ITE311-ALBARINA\app\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ITE311-ALBARINA\system\View\View.php(226): include('C:\\xampp\\htdocs...')
+#8 C:\xampp\htdocs\ITE311-ALBARINA\system\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 C:\xampp\htdocs\ITE311-ALBARINA\system\Common.php(1167): CodeIgniter\View\View->render('materials/manag...', Array, true)
+#10 C:\xampp\htdocs\ITE311-ALBARINA\app\Controllers\Materials.php(524): view('materials/manag...', Array)
+#11 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(933): App\Controllers\Materials->manage()
+#12 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+#13 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#14 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#15 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#16 C:\xampp\htdocs\ITE311-ALBARINA\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#17 {main}
+CRITICAL - 2025-12-11 15:41:01 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+[Method: GET, Route: materials/manage]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 6 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 7 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+ 8 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:01 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 8 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+10 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+12 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+13 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:01 --> [Caused by] mysqli_sql_exception: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 9 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+10 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+11 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+12 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+13 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+14 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+16 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+17 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-11 15:41:03 --> mysqli_sql_exception: Unknown column 'courses.title' in 'field list' in C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignm...', 0)
+#1 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignm...')
+#2 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignm...')
+#3 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignm...', Array, false)
+#4 C:\xampp\htdocs\ITE311-ALBARINA\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ITE311-ALBARINA\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ITE311-ALBARINA\app\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ITE311-ALBARINA\system\View\View.php(226): include('C:\\xampp\\htdocs...')
+#8 C:\xampp\htdocs\ITE311-ALBARINA\system\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 C:\xampp\htdocs\ITE311-ALBARINA\system\Common.php(1167): CodeIgniter\View\View->render('materials/manag...', Array, true)
+#10 C:\xampp\htdocs\ITE311-ALBARINA\app\Controllers\Materials.php(524): view('materials/manag...', Array)
+#11 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(933): App\Controllers\Materials->manage()
+#12 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+#13 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#14 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#15 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#16 C:\xampp\htdocs\ITE311-ALBARINA\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#17 {main}
+CRITICAL - 2025-12-11 15:41:03 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+[Method: GET, Route: materials/manage]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 6 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 7 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+ 8 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:03 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 8 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+10 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+12 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+13 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:03 --> [Caused by] mysqli_sql_exception: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 9 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+10 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+11 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+12 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+13 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+14 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+16 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+17 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-11 15:41:04 --> mysqli_sql_exception: Unknown column 'courses.title' in 'field list' in C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignm...', 0)
+#1 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignm...')
+#2 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignm...')
+#3 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignm...', Array, false)
+#4 C:\xampp\htdocs\ITE311-ALBARINA\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ITE311-ALBARINA\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ITE311-ALBARINA\app\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ITE311-ALBARINA\system\View\View.php(226): include('C:\\xampp\\htdocs...')
+#8 C:\xampp\htdocs\ITE311-ALBARINA\system\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 C:\xampp\htdocs\ITE311-ALBARINA\system\Common.php(1167): CodeIgniter\View\View->render('materials/manag...', Array, true)
+#10 C:\xampp\htdocs\ITE311-ALBARINA\app\Controllers\Materials.php(524): view('materials/manag...', Array)
+#11 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(933): App\Controllers\Materials->manage()
+#12 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+#13 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#14 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#15 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#16 C:\xampp\htdocs\ITE311-ALBARINA\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#17 {main}
+CRITICAL - 2025-12-11 15:41:04 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+[Method: GET, Route: materials/manage]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 6 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 7 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+ 8 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:04 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 8 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+10 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+12 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+13 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:04 --> [Caused by] mysqli_sql_exception: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 9 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+10 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+11 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+12 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+13 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+14 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+16 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+17 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-11 15:41:06 --> mysqli_sql_exception: Unknown column 'courses.title' in 'field list' in C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignm...', 0)
+#1 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignm...')
+#2 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignm...')
+#3 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignm...', Array, false)
+#4 C:\xampp\htdocs\ITE311-ALBARINA\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ITE311-ALBARINA\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ITE311-ALBARINA\app\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ITE311-ALBARINA\system\View\View.php(226): include('C:\\xampp\\htdocs...')
+#8 C:\xampp\htdocs\ITE311-ALBARINA\system\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 C:\xampp\htdocs\ITE311-ALBARINA\system\Common.php(1167): CodeIgniter\View\View->render('materials/manag...', Array, true)
+#10 C:\xampp\htdocs\ITE311-ALBARINA\app\Controllers\Materials.php(524): view('materials/manag...', Array)
+#11 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(933): App\Controllers\Materials->manage()
+#12 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+#13 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#14 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#15 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#16 C:\xampp\htdocs\ITE311-ALBARINA\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#17 {main}
+CRITICAL - 2025-12-11 15:41:06 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+[Method: GET, Route: materials/manage]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 6 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 7 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+ 8 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:06 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 8 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+10 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+12 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+13 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:06 --> [Caused by] mysqli_sql_exception: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Views\materials\manage.php(94): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\manage.php')
+ 9 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+10 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/manage', [], true)
+11 APPPATH\Controllers\Materials.php(524): view('materials/manage', [...])
+12 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+13 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+14 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+16 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+17 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-11 15:41:50 --> mysqli_sql_exception: Unknown column 'courses.title' in 'field list' in C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignm...', 0)
+#1 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignm...')
+#2 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignm...')
+#3 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignm...', Array, false)
+#4 C:\xampp\htdocs\ITE311-ALBARINA\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ITE311-ALBARINA\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ITE311-ALBARINA\app\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(933): App\Controllers\Materials->manage()
+#8 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+#9 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\ITE311-ALBARINA\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2025-12-11 15:41:50 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+[Method: GET, Route: materials/manage]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:50 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:50 --> [Caused by] mysqli_sql_exception: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-11 15:41:51 --> mysqli_sql_exception: Unknown column 'courses.title' in 'field list' in C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignm...', 0)
+#1 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignm...')
+#2 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignm...')
+#3 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignm...', Array, false)
+#4 C:\xampp\htdocs\ITE311-ALBARINA\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ITE311-ALBARINA\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ITE311-ALBARINA\app\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(933): App\Controllers\Materials->manage()
+#8 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+#9 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\ITE311-ALBARINA\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2025-12-11 15:41:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+[Method: GET, Route: materials/manage]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:51 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:51 --> [Caused by] mysqli_sql_exception: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-11 15:41:51 --> mysqli_sql_exception: Unknown column 'courses.title' in 'field list' in C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignm...', 0)
+#1 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignm...')
+#2 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignm...')
+#3 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignm...', Array, false)
+#4 C:\xampp\htdocs\ITE311-ALBARINA\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ITE311-ALBARINA\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ITE311-ALBARINA\app\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(933): App\Controllers\Materials->manage()
+#8 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+#9 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\ITE311-ALBARINA\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2025-12-11 15:41:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+[Method: GET, Route: materials/manage]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:51 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:51 --> [Caused by] mysqli_sql_exception: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-12-11 15:41:51 --> mysqli_sql_exception: Unknown column 'courses.title' in 'field list' in C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignm...', 0)
+#1 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignm...')
+#2 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignm...')
+#3 C:\xampp\htdocs\ITE311-ALBARINA\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignm...', Array, false)
+#4 C:\xampp\htdocs\ITE311-ALBARINA\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ITE311-ALBARINA\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ITE311-ALBARINA\app\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(933): App\Controllers\Materials->manage()
+#8 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+#9 C:\xampp\htdocs\ITE311-ALBARINA\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\ITE311-ALBARINA\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\ITE311-ALBARINA\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2025-12-11 15:41:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+[Method: GET, Route: materials/manage]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:51 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:41:51 --> [Caused by] mysqli_sql_exception: Unknown column 'courses.title' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = \'1\'
+ORDER BY `assignments`.`submitted_at` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `assignments`.*, `users`.`name` as `student_name`, `users`.`email` as `student_email`, `courses`.`title` as `course_title`
+FROM `assignments`
+JOIN `users` ON `users`.`id` = `assignments`.`user_id`
+WHERE `course_id` = :course_id:
+ORDER BY `assignments`.`submitted_at` DESC', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Materials.php(527): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Materials->manage()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Materials))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:43:18 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 74.
+ 1 APPPATH\Views\materials\view_materials.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 74)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(266): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly(1)
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:44:01 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 74.
+ 1 APPPATH\Views\materials\view_materials.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 74)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(266): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly(1)
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:46:47 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 74.
+ 1 APPPATH\Views\materials\view_materials.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 74)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(266): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly(1)
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:47:05 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 74.
+ 1 APPPATH\Views\materials\view_materials.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 74)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(266): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly(1)
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:48:13 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 74.
+ 1 APPPATH\Views\materials\view_materials.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 74)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(266): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly(1)
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:48:14 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 74.
+ 1 APPPATH\Views\materials\view_materials.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 74)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(266): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly(1)
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:48:14 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 74.
+ 1 APPPATH\Views\materials\view_materials.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 74)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(266): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly(1)
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-12-11 15:48:17 --> ErrorException: Undefined array key "uploaded_at"
+[Method: GET, Route: course/view/1]
+in APPPATH\Views\materials\view_materials.php on line 74.
+ 1 APPPATH\Views\materials\view_materials.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "uploaded_at"', 'C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php', 74)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\ITE311-ALBARINA\\app\\Views\\materials\\view_materials.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('materials/view_materials', [], true)
+ 5 APPPATH\Controllers\Course.php(266): view('materials/view_materials', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Course->viewMaterialsOnly(1)
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Course))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

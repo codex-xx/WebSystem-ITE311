@@ -17,6 +17,16 @@ class Course extends Controller
     {
         $db = \Config\Database::connect();
         $builder = $db->table('courses');
+
+        // Only show courses that are properly configured by admin:
+        // - Status is Active
+        // - Have teacher assigned
+        // - Have school_year and semester set
+        $builder->where('status', 'Active')
+                ->where('teacher_id IS NOT NULL')
+                ->where('school_year IS NOT NULL')
+                ->where('semester IS NOT NULL');
+
         $courses = $builder->get()->getResultArray();
 
         // Check enrollment status for logged-in students
@@ -99,6 +109,12 @@ class Course extends Controller
         $db = \Config\Database::connect();
         $builder = $db->table('courses');
 
+        // Apply the same filtering as index method - only show properly configured courses
+        $builder->where('status', 'Active')
+                ->where('teacher_id IS NOT NULL')
+                ->where('school_year IS NOT NULL')
+                ->where('semester IS NOT NULL');
+
         if (!empty($term)) {
             $builder->groupStart()
                     ->like('title', $term)
@@ -139,7 +155,7 @@ class Course extends Controller
 
     /**
      * Display course management page for admin and teachers.
-     * Shows all courses where you can upload materials or update schedules.
+     * Shows course statistics and courses in a table format for management.
      */
     public function manage()
     {
@@ -147,74 +163,53 @@ class Course extends Controller
 
         // Check if user is logged in and has permission (admin or teacher)
         if (!$session->get('isLoggedIn') || !in_array($session->get('role'), ['admin', 'teacher'])) {
-            $session->setFlashdata('error', 'Access denied. Only admins and teachers can manage course materials.');
+            $session->setFlashdata('error', 'Access denied. Only admins and teachers can access course management.');
             return redirect()->to('/dashboard');
         }
 
-        // Get courses assigned to the teacher or all for admin
         $db = \Config\Database::connect();
-        if ($session->get('role') === 'teacher') {
-            $courses = $db->table('courses')->where('teacher_id', $session->get('user_id'))->get()->getResultArray();
+        $courseModel = new \App\Models\CourseModel();
+        $userModel = new \App\Models\UserModel();
+        $userRole = $session->get('role');
+        $userId = $session->get('user_id');
+
+        if ($userRole === 'admin') {
+            // Admin sees all courses and statistics
+            $totalCourses = $courseModel->countAllResults();
+            $activeCourses = $courseModel->where('status', 'Active')->countAllResults();
+
+            // Get all courses with teacher names
+            $courses = $db->table('courses')
+                         ->select('courses.*, users.name as teacher_name')
+                         ->join('users', 'users.id = courses.teacher_id', 'left')
+                         ->orderBy('courses.school_year', 'DESC')
+                         ->orderBy('courses.semester', 'ASC')
+                         ->orderBy('courses.course_code', 'ASC')
+                         ->get()
+                         ->getResultArray();
+
+            // Get all teachers for dropdown
+            $teachers = $userModel->where('role', 'teacher')->findAll();
+
+            $data = [
+                'totalCourses' => $totalCourses,
+                'activeCourses' => $activeCourses,
+                'courses' => $courses,
+                'teachers' => $teachers,
+                'user_name' => $session->get('user_name'),
+                'role' => $userRole
+            ];
+
+            return view('courses/manage', $data);
         } else {
-            $courses = $db->table('courses')->get()->getResultArray();
+            // Teachers use the materials management page
+            return redirect()->to('/materials/manage');
         }
-
-        $data = [
-            'courses' => $courses,
-            'user_name' => $session->get('user_name'),
-            'role' => $session->get('role')
-        ];
-
-        return view('courses/manage', $data);
     }
 
-    /**
-     * Display materials for a specific course.
-     * Shows all uploaded materials for the given course ID.
-     */
-    public function viewMaterials($courseId)
-    {
-        $session = session();
 
-        // Check if user is logged in and has permission (admin or teacher)
-        if (!$session->get('isLoggedIn') || !in_array($session->get('role'), ['admin', 'teacher'])) {
-            $session->setFlashdata('error', 'Access denied. Only admins and teachers can view course materials.');
-            return redirect()->to('/dashboard');
-        }
 
-        // Get all courses for navigation + specific course
-        $db = \Config\Database::connect();
-        $courses = $db->table('courses')->get()->getResultArray();
-        $course = $db->table('courses')->where('id', $courseId)->get()->getRow();
 
-        if (!$course) {
-            $session->setFlashdata('error', 'Course not found.');
-            return redirect()->to('/dashboard');
-        }
-
-        // Get materials for this course
-        $materialModel = new \App\Models\MaterialModel();
-        $materials = $materialModel->getMaterialsByCourse($courseId);
-
-        // Get assignments for this course
-        $assignmentModel = new \App\Models\AssignmentModel();
-        $assignments = $assignmentModel->where('course_id', $courseId)
-                                       ->join('users', 'users.id = assignments.user_id')
-                                       ->select('assignments.*, users.name as student_name, users.email as student_email')
-                                       ->orderBy('assignments.submitted_at', 'DESC')
-                                       ->findAll();
-
-        $data = [
-            'courses' => $courses, // For navigation
-            'current_course' => $course, // For displaying current course
-            'materials' => $materials, // Materials for this course
-            'assignments' => $assignments, // Assignments for this course
-            'user_name' => $session->get('user_name'),
-            'role' => $session->get('role')
-        ];
-
-        return view('materials/upload', $data);
-    }
 
     /**
      * Update course schedule via AJAX.
@@ -287,6 +282,92 @@ class Course extends Controller
             return $this->response->setJSON([
                 'success' => true,
                 'message' => 'Course schedule updated successfully.'
+            ]);
+        } else {
+            // Ensure errors are properly formatted for JSON
+            $errors = $courseModel->errors();
+            $errorMessage = is_array($errors) ? implode(', ', $errors) : 'Validation failed';
+
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => $errorMessage
+            ])->setStatusCode(400);
+        }
+    }
+
+    /**
+     * Update course details via AJAX for admin and teachers.
+     * Expects POST with all course fields.
+     */
+    public function updateCourse()
+    {
+        $session = session();
+
+        // Check if user is logged in and has permission (admin or teacher)
+        if (!$session->get('isLoggedIn') || !in_array($session->get('role'), ['admin', 'teacher'])) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Access denied.'
+            ])->setStatusCode(403);
+        }
+
+        // Get form data
+        $courseId = $this->request->getPost('course_id');
+        $courseCode = $this->request->getPost('course_code');
+        $title = $this->request->getPost('title');
+        $description = $this->request->getPost('description');
+        $schoolYear = $this->request->getPost('school_year');
+        $semester = $this->request->getPost('semester');
+        $startDate = $this->request->getPost('start_date');
+        $endDate = $this->request->getPost('end_date');
+        $teacherId = $this->request->getPost('teacher_id');
+        $schedule = $this->request->getPost('schedule');
+        $scheduleTimeStart = $this->request->getPost('schedule_time_start');
+        $scheduleTimeEnd = $this->request->getPost('schedule_time_end');
+        $status = $this->request->getPost('status');
+
+        if (!$courseId || !$courseCode || !$title || !$schoolYear || !$semester || !$status) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Missing required fields.'
+            ])->setStatusCode(400);
+        }
+
+        // Load CourseModel
+        $courseModel = new \App\Models\CourseModel();
+        $course = $courseModel->find($courseId);
+
+        if (!$course) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Course not found.'
+            ])->setStatusCode(404);
+        }
+
+        // Prepare data for update
+        $updateData = [
+            'course_code' => $courseCode,
+            'title' => $title,
+            'description' => $description,
+            'school_year' => $schoolYear,
+            'semester' => $semester,
+            'start_date' => $startDate ?: null,
+            'end_date' => $endDate ?: null,
+            'teacher_id' => $teacherId ?: null,
+            'schedule_days' => $schedule,
+            'schedule_time_start' => $scheduleTimeStart ?: null,
+            'schedule_time_end' => $scheduleTimeEnd ?: null,
+            'status' => $status,
+        ];
+
+        // For validation, we need to include teacher_id in the validation data
+        $validationData = $updateData;
+
+        // Update the course using the custom method that handles validation separately
+        if ($courseModel->validateAndUpdate($courseId, $updateData, $validationData)) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Course details updated successfully.'
             ]);
         } else {
             // Ensure errors are properly formatted for JSON

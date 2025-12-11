@@ -15,7 +15,7 @@ class Materials extends Controller
 
     /**
      * Display the file upload form and handle the file upload process.
-     * Only admin and teacher can upload.
+     * Only admin and assigned teachers can upload to active courses.
      *
      * @param int $course_id
      */
@@ -23,6 +23,7 @@ class Materials extends Controller
     {
         $session = session();
         $userRole = $session->get('role');
+        $userId = $session->get('user_id');
 
         // Check if user is logged in and has permission (admin or teacher)
         if (!$session->get('isLoggedIn') || !in_array($userRole, ['admin', 'teacher'])) {
@@ -30,11 +31,23 @@ class Materials extends Controller
             return redirect()->to('/dashboard');
         }
 
-        // Check if course exists
+        // Check if course exists and is active
         $db = \Config\Database::connect();
         $course = $db->table('courses')->where('id', $course_id)->get()->getRow();
         if (!$course) {
             $session->setFlashdata('error', 'Course not found.');
+            return redirect()->to('/dashboard');
+        }
+
+        // Check if course is active
+        if ($course->status !== 'Active') {
+            $session->setFlashdata('error', 'Cannot upload materials to inactive courses.');
+            return redirect()->to('/dashboard');
+        }
+
+        // For teachers, check if they are assigned to this course
+        if ($userRole === 'teacher' && $course->teacher_id != $userId) {
+            $session->setFlashdata('error', 'Access denied. You can only upload materials to your assigned courses.');
             return redirect()->to('/dashboard');
         }
 
@@ -46,20 +59,20 @@ class Materials extends Controller
             // Check if file was uploaded
             if (!$file->isValid()) {
                 $session->setFlashdata('error', $file->getErrorString());
-                return redirect()->to('/admin/course/' . $course_id . '/upload');
+            return redirect()->to('/course/' . $course_id . '/upload');
             }
 
             // Validate file type
             $allowedTypes = ['pdf', 'ppt', 'pptx', 'doc', 'docx'];
             if (!in_array($file->getExtension(), $allowedTypes)) {
                 $session->setFlashdata('error', 'Invalid file type. Only PDF, PPT, PPTX, DOC, DOCX files are allowed.');
-                return redirect()->to('/admin/course/' . $course_id . '/upload');
+                return redirect()->to('/course/' . $course_id . '/upload');
             }
 
             // Check file size (10MB max)
             if ($file->getSize() > 10 * 1024 * 1024) {
                 $session->setFlashdata('error', 'File size too large. Maximum size is 10MB.');
-                return redirect()->to('/admin/course/' . $course_id . '/upload');
+                return redirect()->to('/course/' . $course_id . '/upload');
             }
 
             // Generate unique filename to avoid conflicts
@@ -101,7 +114,7 @@ class Materials extends Controller
                 $session->setFlashdata('error', 'Failed to upload file.');
             }
 
-            return redirect()->to('/admin/course/' . $course_id . '/upload');
+            return redirect()->to('/course/' . $course_id . '/upload');
         }
 
         // Display upload form
@@ -482,6 +495,144 @@ if ($assignmentModel->submitAssignment($data)) {
     }
 
     /**
+     * Teacher materials management page - shows all courses with upload and grading functionality.
+     */
+    public function manage()
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+        $userRole = $session->get('role');
+
+        if (!$session->get('isLoggedIn') || $userRole !== 'teacher') {
+            $session->setFlashdata('error', 'Access denied. Only teachers can access this page.');
+            return redirect()->to('/dashboard');
+        }
+
+        // Get all courses assigned to this teacher
+        $db = \Config\Database::connect();
+        $courses = $db->table('courses')
+                     ->where('teacher_id', $userId)
+                     ->get()
+                     ->getResultArray();
+
+        // Get assignments for all courses assigned to this teacher
+        $assignmentModel = new \App\Models\AssignmentModel();
+        $courseIds = array_column($courses, 'id');
+
+        if (!empty($courseIds)) {
+            $allAssignments = $assignmentModel->whereIn('course_id', $courseIds)
+                                             ->join('users', 'users.id = assignments.user_id')
+                                             ->select('assignments.*, users.name as student_name, users.email as student_email')
+                                             ->orderBy('assignments.submitted_at', 'DESC')
+                                             ->findAll();
+
+            // Add course title to each assignment
+            $courseTitles = [];
+            foreach ($courses as $course) {
+                $courseTitles[$course['id']] = $course['title'];
+            }
+
+            foreach ($allAssignments as &$assignment) {
+                $assignment['course_title'] = $courseTitles[$assignment['course_id']] ?? 'Unknown Course';
+            }
+        } else {
+            $allAssignments = [];
+        }
+
+        $data = [
+            'courses' => $courses,
+            'assignments' => $allAssignments,
+            'user_name' => $session->get('user_name'),
+            'role' => $userRole,
+        ];
+
+        return view('materials/manage', $data);
+    }
+
+    /**
+     * Teacher course selection page - shows all courses teacher can manage.
+     */
+    public function courseSelection()
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+        $userRole = $session->get('role');
+
+        if (!$session->get('isLoggedIn') || $userRole !== 'teacher') {
+            $session->setFlashdata('error', 'Access denied. Only teachers can access this page.');
+            return redirect()->to('/dashboard');
+        }
+
+        // Get all courses for the teacher to manage
+        $db = \Config\Database::connect();
+        $courses = $db->table('courses')
+                     ->where('teacher_id', $userId)
+                     ->get()
+                     ->getResultArray();
+
+        $data = [
+            'courses' => $courses,
+            'user_name' => $session->get('user_name'),
+            'role' => $userRole,
+        ];
+
+        return view('materials/course_selection', $data);
+    }
+
+    /**
+     * Teacher view: grade assignments for a specific course.
+     */
+    public function gradeAssignmentsView($courseId)
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+        $userRole = $session->get('role');
+
+        if (!$session->get('isLoggedIn') || $userRole !== 'teacher') {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['error' => 'Access denied'])->setStatusCode(403);
+            }
+            $session->setFlashdata('error', 'Access denied. Only teachers can grade assignments.');
+            return redirect()->to('/dashboard');
+        }
+
+        // Check if the teacher is assigned to this course
+        $db = \Config\Database::connect();
+        $course = $db->table('courses')->where('id', $courseId)->where('teacher_id', $userId)->get()->getRow();
+
+        if (!$course) {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['error' => 'Access denied'])->setStatusCode(403);
+            }
+            $session->setFlashdata('error', 'Access denied. You can only grade assignments for your assigned courses.');
+            return redirect()->to('/manage_course');
+        }
+
+        // Get assignments for this course
+        $assignmentModel = new \App\Models\AssignmentModel();
+        $assignments = $assignmentModel->where('course_id', $courseId)
+                                       ->join('users', 'users.id = assignments.user_id')
+                                       ->select('assignments.*, users.name as student_name, users.email as student_email')
+                                       ->orderBy('assignments.submitted_at', 'DESC')
+                                       ->findAll();
+
+        $data = [
+            'course' => $course,
+            'assignments' => $assignments,
+            'user_name' => $session->get('user_name'),
+            'role' => $userRole,
+        ];
+
+        // If AJAX request, return just the assignments table content
+        if ($this->request->isAJAX()) {
+            return view('materials/grade_assignments_modal', $data);
+        }
+
+        // Otherwise return the full page
+        return view('materials/grade_assignments', $data);
+    }
+
+    /**
      * Student view: see grades for submitted assignments.
      */
     public function grades()
@@ -505,4 +656,6 @@ if ($assignmentModel->submitAssignment($data)) {
 
         return view('materials/grades', $data);
     }
+
+
 }
