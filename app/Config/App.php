@@ -199,4 +199,13 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Debug Toolbar
+     * --------------------------------------------------------------------------
+     *
+     * If true, the Debug Toolbar will be enabled.
+     */
+    public bool $toolbarEnabled = false;
 }
