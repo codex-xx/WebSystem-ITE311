@@ -277,16 +277,25 @@ class Course extends Controller
             'schedule_time_end' => $scheduleTimeEnd,
         ];
 
-        // Update the course
-        if ($courseModel->update($courseId, $updateData)) {
+        // For schedule validation, we need to include teacher_id in the validation data
+        // but we don't want to update the teacher_id field
+        $validationData = $updateData;
+        $validationData['teacher_id'] = $course['teacher_id'];
+
+        // Update the course using the custom method that handles validation separately
+        if ($courseModel->validateAndUpdate($courseId, $updateData, $validationData)) {
             return $this->response->setJSON([
                 'success' => true,
                 'message' => 'Course schedule updated successfully.'
             ]);
         } else {
+            // Ensure errors are properly formatted for JSON
+            $errors = $courseModel->errors();
+            $errorMessage = is_array($errors) ? implode(', ', $errors) : 'Validation failed';
+
             return $this->response->setJSON([
                 'success' => false,
-                'message' => implode(', ', $courseModel->errors())
+                'message' => $errorMessage
             ])->setStatusCode(400);
         }
     }

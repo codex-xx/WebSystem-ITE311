@@ -59,3 +59,7 @@ $routes->post('enrollment/approve', 'Enrollment::approve');
 $routes->post('enrollment/deny', 'Enrollment::deny');
 $routes->get('enrollment/force', 'Enrollment::forceEnrollForm');
 $routes->post('enrollment/force', 'Enrollment::forceEnroll');
+
+// Course routes
+$routes->post('course/updateSchedule', 'Course::updateSchedule');
+$routes->get('course/viewMaterials/(:num)', 'Course::viewMaterials/$1');

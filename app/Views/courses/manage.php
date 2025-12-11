@@ -39,13 +39,13 @@
                                 <button class="btn btn-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#editSchedule<?= $course['id'] ?>">
                                     <i class="bi bi-pencil"></i> Edit Schedule
                                 </button>
-                                <a href="<?= base_url('index.php/course/viewMaterials/' . $course['id']) ?>" class="btn btn-success btn-sm ms-2">
+                                <a href="<?= base_url('course/viewMaterials/' . $course['id']) ?>" class="btn btn-success btn-sm ms-2">
                                     <i class="bi bi-folder"></i> View Materials
                                 </a>
                             </div>
 
                             <div id="editSchedule<?= $course['id'] ?>" class="collapse mt-3">
-                                <form action="<?= base_url('index.php/course/updateSchedule') ?>" method="post" class="schedule-form">
+                                <form action="<?= base_url('course/updateSchedule') ?>" method="post" class="schedule-form">
                                     <input type="hidden" name="course_id" value="<?= $course['id'] ?>">
                                     <div class="row">
                                         <div class="col-md-3">
@@ -106,7 +106,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Server error: ' + response.status);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     alert('Schedule updated successfully!');
@@ -117,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('An error occurred while updating the schedule.');
+                alert('An error occurred while updating the schedule: ' + error.message);
             });
         });
     });

@@ -73,7 +73,7 @@ class CourseModel extends Model
     /**
      * Override update to add validation for teacher conflicts.
      */
-    public function update($id = null, $row = null, bool $returnID = true)
+    public function update($id = null, $row = null): bool
     {
         // Run standard validation
         if (!$this->validate($row)) {
@@ -86,7 +86,27 @@ class CourseModel extends Model
             return false;
         }
 
-        return parent::update($id, $row, $returnID);
+        return parent::update($id, $row);
+    }
+
+    /**
+     * Custom method for updating schedule with separate validation data.
+     * This allows passing teacher_id for validation without updating it.
+     */
+    public function validateAndUpdate($id = null, $updateData = null, $validationData = null)
+    {
+        // Run standard validation on update data
+        if (!$this->validate($updateData)) {
+            return false;
+        }
+
+        // Check teacher schedule conflict using validation data
+        if (isset($validationData['teacher_id']) && $validationData['teacher_id'] && !$this->isTeacherScheduleValid($validationData, $id)) {
+            $this->errors['schedule_days'] = 'Teacher has a schedule conflict with this course.';
+            return false;
+        }
+
+        return parent::update($id, $updateData);
     }
 
     /**
@@ -141,10 +161,15 @@ class CourseModel extends Model
         }
 
         // Check if times overlap
-        $newStart = strtotime($new['schedule_time_start']);
-        $newEnd = strtotime($new['schedule_time_end']);
-        $existingStart = strtotime($existing['schedule_time_start']);
-        $existingEnd = strtotime($existing['schedule_time_end']);
+        $newStart = $new['schedule_time_start'] ? strtotime($new['schedule_time_start']) : false;
+        $newEnd = $new['schedule_time_end'] ? strtotime($new['schedule_time_end']) : false;
+        $existingStart = $existing['schedule_time_start'] ? strtotime($existing['schedule_time_start']) : false;
+        $existingEnd = $existing['schedule_time_end'] ? strtotime($existing['schedule_time_end']) : false;
+
+        // If either course doesn't have valid times, no overlap
+        if ($newStart === false || $newEnd === false || $existingStart === false || $existingEnd === false) {
+            return false;
+        }
 
         return ($newStart < $existingEnd && $newEnd > $existingStart);
     }
