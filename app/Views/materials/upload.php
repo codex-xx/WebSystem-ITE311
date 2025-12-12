@@ -198,9 +198,9 @@ Course Material Management - ITE311
                         <label for="material_file" class="form-label">
                             <i class="bi bi-file-earmark"></i> Select File
                         </label>
-                        <input type="file" class="form-control" id="material_file" name="material_file" required accept=".pdf,.ppt,.pptx,.doc,.docx">
+                        <input type="file" class="form-control" id="material_file" name="material_file" required accept=".pdf,.ppt,.pptx">
                         <div class="form-text">
-                            <strong>Allowed types:</strong> PDF, PPT, PPTX, DOC, DOCX
+                            <strong>Allowed types:</strong> PDF, PPT, PPTX
                             <br><strong>Maximum size:</strong> 10MB
                         </div>
                     </div>
@@ -292,22 +292,20 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
             'X-Requested-With': 'XMLHttpRequest'
         }
     })
-    .then(response => {
-        // Check if response is successful (200-399 range)
-        if (response.status >= 200 && response.status < 400) {
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
             // Success - close modal and show success message
             bootstrap.Modal.getInstance(document.getElementById('uploadModal')).hide();
-            showAlert('<i class="bi bi-check-circle"></i> Upload completed successfully!', 'success');
+            showAlert('<i class="bi bi-check-circle"></i> ' + data.message, 'success');
 
             // Reload page to show updated materials count
             setTimeout(() => {
                 location.reload();
             }, 1500);
         } else {
-            // Try to get error message from response
-            return response.text().then(text => {
-                throw new Error(text || 'Upload failed with status: ' + response.status);
-            });
+            // Show error message
+            showAlert('<i class="bi bi-exclamation-triangle"></i> ' + data.message, 'danger');
         }
     })
     .catch(error => {
@@ -356,14 +354,13 @@ function showAlert(message, type) {
 document.getElementById('material_file').addEventListener('change', function(e) {
     const file = e.target.files[0];
     const allowedTypes = ['application/pdf', 'application/vnd.ms-powerpoint',
-                         'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-                         'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+                         'application/vnd.openxmlformats-officedocument.presentationml.presentation'];
 
     const maxSize = 10 * 1024 * 1024; // 10MB
 
     if (file) {
         if (!allowedTypes.includes(file.type)) {
-            showAlert('<i class="bi bi-exclamation-triangle"></i> Invalid file type. Please select a PDF, PPT, PPTX, DOC, or DOCX file.', 'danger');
+            showAlert('<i class="bi bi-exclamation-triangle"></i> Only PDF and PPT files are allowed.', 'danger');
             e.target.value = '';
         } else if (file.size > maxSize) {
             showAlert('<i class="bi bi-exclamation-triangle"></i> File size too large. Please select a file smaller than 10MB.', 'danger');
@@ -399,7 +396,7 @@ document.querySelectorAll('.grade-btn').forEach(btn => {
             if (data.success) {
                 showAlert('<i class="bi bi-check-circle"></i> Grade saved', 'success');
                 setTimeout(() => location.reload(), 800);
-            } else {
+            }  {
                 throw new Error(data.message || 'Failed to save grade');
             }
         })

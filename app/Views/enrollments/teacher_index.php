@@ -12,7 +12,7 @@
                 <div class="card-body">
 
                     <div class="mb-4">
-                        <a href="/enrollment/force" class="btn btn-success">
+                        <a href="<?= base_url('enrollment/force') ?>" class="btn btn-success">
                             <i class="bi bi-person-plus"></i> Force Enroll Student
                         </a>
                     </div>

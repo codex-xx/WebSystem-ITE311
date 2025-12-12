@@ -49,7 +49,7 @@
                                         <select id="course_id" name="course_id" required class="form-select">
                                             <option value="">Choose a course...</option>
                                             <?php foreach ($courses as $course): ?>
-                                                <option value="<?= $course['id'] ?>">
+                                                <option value="<?= $course['id'] ?>" <?= isset($preSelectedCourseId) && $preSelectedCourseId == $course['id'] ? 'selected' : '' ?>>
                                                     <?= esc($course['title']) ?> (<?= esc($course['course_code'] ?? '') ?>)
                                                 </option>
                                             <?php endforeach; ?>
@@ -104,6 +104,7 @@
 
 <script>
 const courses = <?= json_encode($courses) ?>;
+const preSelectedCourseId = <?= json_encode($preSelectedCourseId) ?>;
 
 document.getElementById('course_id').addEventListener('change', function() {
     const courseId = this.value;
@@ -112,7 +113,7 @@ document.getElementById('course_id').addEventListener('change', function() {
 
     if (courseId) {
         // Show course details
-        courseDetails.classList.remove('hidden');
+        courseDetails.classList.remove('d-none');
 
         // Find course data
         const course = courses.find(c => c.id == courseId);
@@ -125,8 +126,8 @@ document.getElementById('course_id').addEventListener('change', function() {
             // We'd need teacher name via AJAX
         }
     } else {
-        courseDetails.classList.add('hidden');
-        conflictCheck.classList.add('hidden');
+        courseDetails.classList.add('d-none');
+        conflictCheck.classList.add('d-none');
     }
 });
 
@@ -157,8 +158,8 @@ document.getElementById('forceEnrollForm').addEventListener('submit', function(e
 
             // Reset form and redirect
             this.reset();
-            document.getElementById('courseDetails').classList.add('hidden');
-            document.getElementById('conflictCheck').classList.add('hidden');
+            document.getElementById('courseDetails').classList.add('d-none');
+            document.getElementById('conflictCheck').classList.add('d-none');
             window.location.href = '<?= base_url('enrollment/teacher') ?>';
         } else {
             alert('Error: ' + data.message);
@@ -174,5 +175,10 @@ document.getElementById('forceEnrollForm').addEventListener('submit', function(e
         submitBtn.disabled = false;
     });
 });
+
+// Trigger change event if course is preselected
+if (preSelectedCourseId) {
+    document.getElementById('course_id').dispatchEvent(new Event('change'));
+}
 </script>
 <?= $this->endSection() ?>

@@ -186,9 +186,12 @@ class Enrollment extends Controller
         $users = $db->table('users')->select('id, name, email')->get()->getResultArray();
         $courses = $db->table('courses')->select('id, title, course_code')->get()->getResultArray();
 
+        $preSelectedCourseId = $this->request->getGet('course_id') ?: null;
+
         return view('enrollments/force_enroll_form', [
             'users' => $users,
             'courses' => $courses,
+            'preSelectedCourseId' => $preSelectedCourseId,
             'user_name' => $session->get('user_name'),
             'role' => $session->get('role')
         ]);

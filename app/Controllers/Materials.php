@@ -58,20 +58,32 @@ class Materials extends Controller
 
             // Check if file was uploaded
             if (!$file->isValid()) {
-                $session->setFlashdata('error', $file->getErrorString());
-            return redirect()->to('/course/' . $course_id . '/upload');
+                $errorMessage = $file->getErrorString();
+                if ($this->request->isAJAX()) {
+                    return $this->response->setJSON(['success' => false, 'message' => $errorMessage])->setStatusCode(400);
+                }
+                $session->setFlashdata('error', $errorMessage);
+                return redirect()->to('/course/' . $course_id . '/upload');
             }
 
             // Validate file type
-            $allowedTypes = ['pdf', 'ppt', 'pptx', 'doc', 'docx'];
+            $allowedTypes = ['pdf', 'ppt', 'pptx'];
             if (!in_array($file->getExtension(), $allowedTypes)) {
-                $session->setFlashdata('error', 'Invalid file type. Only PDF, PPT, PPTX, DOC, DOCX files are allowed.');
+                $errorMessage = 'Only PDF and PPT files are allowed.';
+                if ($this->request->isAJAX()) {
+                    return $this->response->setJSON(['success' => false, 'message' => $errorMessage])->setStatusCode(400);
+                }
+                $session->setFlashdata('error', $errorMessage);
                 return redirect()->to('/course/' . $course_id . '/upload');
             }
 
             // Check file size (10MB max)
             if ($file->getSize() > 10 * 1024 * 1024) {
-                $session->setFlashdata('error', 'File size too large. Maximum size is 10MB.');
+                $errorMessage = 'File size too large. Maximum size is 10MB.';
+                if ($this->request->isAJAX()) {
+                    return $this->response->setJSON(['success' => false, 'message' => $errorMessage])->setStatusCode(400);
+                }
+                $session->setFlashdata('error', $errorMessage);
                 return redirect()->to('/course/' . $course_id . '/upload');
             }
 
@@ -102,19 +114,31 @@ class Materials extends Controller
                 // Save to database
                 $materialModel = new MaterialModel();
                 if ($materialModel->insertMaterial($data)) {
+                    if ($this->request->isAJAX()) {
+                        return $this->response->setJSON(['success' => true, 'message' => 'Material uploaded successfully.']);
+                    }
                     $session->setFlashdata('success', 'Material uploaded successfully.');
+                    return redirect()->to('/course/' . $course_id . '/upload');
                 } else {
-                    $session->setFlashdata('error', 'Failed to save material to database.');
                     // Delete uploaded file if database save failed
                     if (file_exists($data['file_path'])) {
                         unlink($data['file_path']);
                     }
+                    $errorMessage = 'Failed to save material to database.';
+                    if ($this->request->isAJAX()) {
+                        return $this->response->setJSON(['success' => false, 'message' => $errorMessage])->setStatusCode(500);
+                    }
+                    $session->setFlashdata('error', $errorMessage);
+                    return redirect()->to('/course/' . $course_id . '/upload');
                 }
             } else {
-                $session->setFlashdata('error', 'Failed to upload file.');
+                $errorMessage = 'Failed to upload file.';
+                if ($this->request->isAJAX()) {
+                    return $this->response->setJSON(['success' => false, 'message' => $errorMessage])->setStatusCode(500);
+                }
+                $session->setFlashdata('error', $errorMessage);
+                return redirect()->to('/course/' . $course_id . '/upload');
             }
-
-            return redirect()->to('/course/' . $course_id . '/upload');
         }
 
         // Display upload form
