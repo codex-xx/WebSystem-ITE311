@@ -63,4 +63,5 @@ $routes->post('enrollment/force', 'Enrollment::forceEnroll');
 // Course routes
 $routes->post('course/updateSchedule', 'Course::updateSchedule');
 $routes->post('course/updateCourse', 'Course::updateCourse');
+$routes->post('course/createCourse', 'Course::createCourse');
 $routes->get('course/materials/(:num)', 'Materials::courseMaterials/$1');

@@ -45,6 +45,14 @@
             <!-- Courses Table -->
             <div class="card shadow-sm" style="border: none; border-radius: 10px;">
                 <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div></div>
+                        <div>
+                            <button id="addCourseBtn" class="btn btn-success" style="border-radius: 25px; padding: 8px 20px; background: linear-gradient(135deg, #28a745 0%, #218838 100%); border: none;">
+                                <i class="bi bi-plus-lg me-1"></i> Add Course
+                            </button>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover" id="coursesTable">
                             <thead style="background-color: #f1f3f4;">
@@ -191,7 +199,15 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="school_year" class="form-label" style="font-weight: 500;">School Year</label>
-                            <input type="text" class="form-control" id="school_year" name="school_year" required>
+                            <select class="form-control" id="school_year" name="school_year" required>
+                                <option value="">Select School Year</option>
+                                <option value="2022-2023">2022-2023</option>
+                                <option value="2023-2024">2023-2024</option>
+                                <option value="2024-2025">2024-2025</option>
+                                <option value="2025-2026">2025-2026</option>
+                                <option value="2026-2027">2026-2027</option>
+                                <option value="2027-2028">2027-2028</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="semester" class="form-label" style="font-weight: 500;">Semester</label>
@@ -225,8 +241,38 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="schedule" class="form-label" style="font-weight: 500;">Schedule Days</label>
-                            <input type="text" class="form-control" id="schedule" name="schedule" placeholder="e.g., Monday, Wednesday, Friday">
+                            <label class="form-label" style="font-weight: 500;">Schedule Days</label>
+                            <div class="mt-2">
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox" type="checkbox" id="monday" value="Monday" data-schedule="schedule">
+                                    <label class="form-check-label" for="monday">Monday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox" type="checkbox" id="tuesday" value="Tuesday" data-schedule="schedule">
+                                    <label class="form-check-label" for="tuesday">Tuesday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox" type="checkbox" id="wednesday" value="Wednesday" data-schedule="schedule">
+                                    <label class="form-check-label" for="wednesday">Wednesday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox" type="checkbox" id="thursday" value="Thursday" data-schedule="schedule">
+                                    <label class="form-check-label" for="thursday">Thursday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox" type="checkbox" id="friday" value="Friday" data-schedule="schedule">
+                                    <label class="form-check-label" for="friday">Friday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox" type="checkbox" id="saturday" value="Saturday" data-schedule="schedule">
+                                    <label class="form-check-label" for="saturday">Saturday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox" type="checkbox" id="sunday" value="Sunday" data-schedule="schedule">
+                                    <label class="form-check-label" for="sunday">Sunday</label>
+                                </div>
+                            </div>
+                            <input type="hidden" id="schedule" name="schedule">
                         </div>
                     </div>
 
@@ -259,6 +305,142 @@
             <div class="modal-footer" style="border-top: 1px solid #e9ecef;">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 25px; padding: 8px 20px;">Cancel</button>
                 <button type="button" class="btn btn-primary" id="updateCourseBtn" style="border-radius: 25px; padding: 8px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Create Course Modal (same design as edit) -->
+<div class="modal fade" id="createCourseModal" tabindex="-1" aria-labelledby="createCourseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="border-radius: 15px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px 15px 0 0;">
+                <h5 class="modal-title" id="createCourseModalLabel">Add New Course</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createCourseForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="create_course_code" class="form-label" style="font-weight: 500;">Course Code</label>
+                            <input type="text" class="form-control" id="create_course_code" name="course_code" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="create_title" class="form-label" style="font-weight: 500;">Course Title</label>
+                            <input type="text" class="form-control" id="create_title" name="title" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="create_school_year" class="form-label" style="font-weight: 500;">School Year</label>
+                            <select class="form-control" id="create_school_year" name="school_year" required>
+                                <option value="">Select School Year</option>
+                                <option value="2022-2023">2022-2023</option>
+                                <option value="2023-2024">2023-2024</option>
+                                <option value="2024-2025">2024-2025</option>
+                                <option value="2025-2026">2025-2026</option>
+                                <option value="2026-2027">2026-2027</option>
+                                <option value="2027-2028">2027-2028</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="create_semester" class="form-label" style="font-weight: 500;">Semester</label>
+                            <select class="form-control" id="create_semester" name="semester" required>
+                                <option value="1st">1st Semester</option>
+                                <option value="2nd">2nd Semester</option>
+                                <option value="Summer">Summer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="create_start_date" class="form-label" style="font-weight: 500;">Start Date</label>
+                            <input type="date" class="form-control" id="create_start_date" name="start_date">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="create_end_date" class="form-label" style="font-weight: 500;">End Date</label>
+                            <input type="date" class="form-control" id="create_end_date" name="end_date">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="create_teacher_id" class="form-label" style="font-weight: 500;">Teacher</label>
+                            <select class="form-control" id="create_teacher_id" name="teacher_id">
+                                <option value="">Select Teacher</option>
+                                <?php foreach ($teachers as $teacher): ?>
+                                    <option value="<?= $teacher['id'] ?>"><?= esc($teacher['name']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" style="font-weight: 500;">Schedule Days</label>
+                            <div class="mt-2">
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox-create" type="checkbox" id="create_monday" value="Monday" data-schedule="create_schedule">
+                                    <label class="form-check-label" for="create_monday">Monday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox-create" type="checkbox" id="create_tuesday" value="Tuesday" data-schedule="create_schedule">
+                                    <label class="form-check-label" for="create_tuesday">Tuesday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox-create" type="checkbox" id="create_wednesday" value="Wednesday" data-schedule="create_schedule">
+                                    <label class="form-check-label" for="create_wednesday">Wednesday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox-create" type="checkbox" id="create_thursday" value="Thursday" data-schedule="create_schedule">
+                                    <label class="form-check-label" for="create_thursday">Thursday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox-create" type="checkbox" id="create_friday" value="Friday" data-schedule="create_schedule">
+                                    <label class="form-check-label" for="create_friday">Friday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox-create" type="checkbox" id="create_saturday" value="Saturday" data-schedule="create_schedule">
+                                    <label class="form-check-label" for="create_saturday">Saturday</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input schedule-day-checkbox-create" type="checkbox" id="create_sunday" value="Sunday" data-schedule="create_schedule">
+                                    <label class="form-check-label" for="create_sunday">Sunday</label>
+                                </div>
+                            </div>
+                            <input type="hidden" id="create_schedule" name="schedule_days">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="create_schedule_time_start" class="form-label" style="font-weight: 500;">Start Time</label>
+                            <input type="time" class="form-control" id="create_schedule_time_start" name="schedule_time_start">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="create_schedule_time_end" class="form-label" style="font-weight: 500;">End Time</label>
+                            <input type="time" class="form-control" id="create_schedule_time_end" name="schedule_time_end">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="create_status" class="form-label" style="font-weight: 500;">Status</label>
+                            <select class="form-control" id="create_status" name="status" required>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="create_description" class="form-label" style="font-weight: 500;">Description</label>
+                            <textarea class="form-control" id="create_description" name="description" rows="2"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid #e9ecef;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 25px; padding: 8px 20px;">Cancel</button>
+                <button type="button" class="btn btn-success" id="createCourseBtn" style="border-radius: 25px; padding: 8px 20px; background: linear-gradient(135deg, #28a745 0%, #218838 100%); border: none;">Create</button>
             </div>
         </div>
     </div>
@@ -353,19 +535,40 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('start_date').value = this.dataset.startDate;
             document.getElementById('end_date').value = this.dataset.endDate;
             document.getElementById('teacher_id').value = this.dataset.teacherId;
-            document.getElementById('schedule').value = this.dataset.schedule;
             document.getElementById('schedule_time_start').value = this.dataset.scheduleTimeStart;
             document.getElementById('schedule_time_end').value = this.dataset.scheduleTimeEnd;
             document.getElementById('status').value = this.dataset.status;
+
+            // Parse schedule days and check corresponding checkboxes
+            const scheduleDays = this.dataset.schedule ? this.dataset.schedule.split(',').map(s => s.trim()) : [];
+            document.querySelectorAll('.schedule-day-checkbox').forEach(checkbox => {
+                checkbox.checked = scheduleDays.includes(checkbox.value);
+            });
 
             editCourseModal.show();
         });
     });
 
+    // Helper function to collect selected schedule days
+    function collectScheduleDays(checkboxSelector) {
+        const checkboxes = document.querySelectorAll(checkboxSelector);
+        const selectedDays = [];
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedDays.push(checkbox.value);
+            }
+        });
+        return selectedDays.join(', ');
+    }
+
     // Update course
     document.getElementById('updateCourseBtn').addEventListener('click', function() {
         const form = document.getElementById('editCourseForm');
         const formData = new FormData(form);
+
+        // Collect selected schedule days and set hidden input
+        const scheduleDays = collectScheduleDays('.schedule-day-checkbox');
+        formData.set('schedule', scheduleDays);
 
         // Basic client-side validation for dates
         const startDate = formData.get('start_date');
@@ -395,6 +598,100 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error:', error);
             alert('An error occurred while updating the course.');
+        });
+    });
+
+    // Function to auto-populate start and end dates based on school year
+    function autoPopulateDates(schoolYearValue, startDateId, endDateId) {
+        if (!schoolYearValue || !schoolYearValue.trim()) return;
+
+        const match = schoolYearValue.match(/(\d{4})\s*-\s*(\d{4})/);
+        if (!match) return;
+
+        const startYear = parseInt(match[1]);
+        const endYear = parseInt(match[2]);
+
+        // Assume school year starts in September and ends in June
+        const startDate = new Date(startYear, 8, 1); // September 1st
+        const endDate = new Date(endYear, 5, 30);     // June 30th
+
+        const startDateStr = startDate.toISOString().split('T')[0];
+        const endDateStr = endDate.toISOString().split('T')[0];
+
+        document.getElementById(startDateId).value = startDateStr;
+        document.getElementById(endDateId).value = endDateStr;
+    }
+
+    // Edit modal: listen to school_year changes
+    const editSchoolYearField = document.getElementById('school_year');
+    if (editSchoolYearField) {
+        editSchoolYearField.addEventListener('change', function() {
+            autoPopulateDates(this.value, 'start_date', 'end_date');
+        });
+    }
+
+    // Create modal: listen to school_year changes
+    const createSchoolYearField = document.getElementById('create_school_year');
+    if (createSchoolYearField) {
+        createSchoolYearField.addEventListener('change', function() {
+            autoPopulateDates(this.value, 'create_start_date', 'create_end_date');
+        });
+    }
+
+    // Create course modal handling
+    const createCourseModal = new bootstrap.Modal(document.getElementById('createCourseModal'));
+    const addCourseBtn = document.getElementById('addCourseBtn');
+
+    if (addCourseBtn) {
+        addCourseBtn.addEventListener('click', function() {
+            // Clear create form
+            document.getElementById('createCourseForm').reset();
+            createCourseModal.show();
+        });
+    }
+
+    document.getElementById('createCourseBtn').addEventListener('click', function() {
+        const form = document.getElementById('createCourseForm');
+        const formData = new FormData(form);
+
+        // Collect selected schedule days and set hidden input
+        const scheduleDays = collectScheduleDays('.schedule-day-checkbox-create');
+        formData.set('schedule_days', scheduleDays);
+
+        // Basic date validation
+        const startDate = formData.get('start_date');
+        const endDate = formData.get('end_date');
+        if (startDate && endDate && new Date(startDate) >= new Date(endDate)) {
+            alert('End date must be after start date.');
+            return;
+        }
+
+        this.disabled = true;
+        this.textContent = 'Creating...';
+
+        fetch('<?= base_url('course/createCourse') ?>', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Course created successfully!');
+                location.reload();
+            } else {
+                alert('Error: ' + (data.message || 'Validation failed'));
+                document.getElementById('createCourseBtn').disabled = false;
+                document.getElementById('createCourseBtn').textContent = 'Create';
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('An error occurred while creating the course.');
+            document.getElementById('createCourseBtn').disabled = false;
+            document.getElementById('createCourseBtn').textContent = 'Create';
         });
     });
 });

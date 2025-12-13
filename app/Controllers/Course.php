@@ -380,4 +380,76 @@ class Course extends Controller
             ])->setStatusCode(400);
         }
     }
+
+    /**
+     * Create new course via AJAX for admin.
+     */
+    public function createCourse()
+    {
+        $session = session();
+
+        // Check if user is logged in and has permission (admin or teacher)
+        if (!$session->get('isLoggedIn') || !in_array($session->get('role'), ['admin', 'teacher'])) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Access denied.'
+            ])->setStatusCode(403);
+        }
+
+        // Get form data
+        $courseCode = $this->request->getPost('course_code');
+        $title = $this->request->getPost('title');
+        $description = $this->request->getPost('description');
+        $schoolYear = $this->request->getPost('school_year');
+        $semester = $this->request->getPost('semester');
+        $startDate = $this->request->getPost('start_date');
+        $endDate = $this->request->getPost('end_date');
+        $teacherId = $this->request->getPost('teacher_id');
+        $schedule = $this->request->getPost('schedule_days');
+        $scheduleTimeStart = $this->request->getPost('schedule_time_start');
+        $scheduleTimeEnd = $this->request->getPost('schedule_time_end');
+        $status = $this->request->getPost('status');
+
+        if (!$courseCode || !$title || !$schoolYear || !$semester || !$status) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Missing required fields.'
+            ])->setStatusCode(400);
+        }
+
+        $courseModel = new \App\Models\CourseModel();
+
+        $data = [
+            'course_code' => $courseCode,
+            'title' => $title,
+            'description' => $description,
+            'school_year' => $schoolYear,
+            'semester' => $semester,
+            'start_date' => $startDate ?: null,
+            'end_date' => $endDate ?: null,
+            'teacher_id' => $teacherId ?: null,
+            'schedule_days' => $schedule,
+            'schedule_time_start' => $scheduleTimeStart ?: null,
+            'schedule_time_end' => $scheduleTimeEnd ?: null,
+            'status' => $status,
+        ];
+
+        $insertId = $courseModel->insert($data);
+
+        if ($insertId === false) {
+            $errors = $courseModel->errors();
+            $errorMessage = is_array($errors) ? implode(', ', $errors) : 'Validation failed';
+
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => $errorMessage
+            ])->setStatusCode(400);
+        }
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Course created successfully.',
+            'id' => $insertId
+        ]);
+    }
 }
